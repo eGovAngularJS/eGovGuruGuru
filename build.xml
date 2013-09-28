@@ -61,7 +61,7 @@
 		</waitfor>
 		<delete dir="${jboss.deploy.war}" />
 
-		<copy file="/${project.name}.war" todir="${jboss.deploy.dir}" />
+		<copy file="${basedir}/${project.name}.war" todir="${jboss.deploy.dir}" />
 
 		<touch file="${jboss.deploy.war}.dodeploy" />
 
