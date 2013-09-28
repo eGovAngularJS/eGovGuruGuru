@@ -23,7 +23,12 @@
 		<mkdir dir="${web.class.dir}"/>
 		<copy todir="${web.class.dir}">
 			<fileset dir="${resources.dir}">
-				<include name="/**/*.*" />
+				<include name="**/*.properties"/>
+				<include name="*.xml"/>
+				<include name="**/*.xml"/>
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml"/>
 			</fileset>
 		</copy>
 	</target>
