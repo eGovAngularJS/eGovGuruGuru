@@ -50,7 +50,7 @@
 	</target>
 
 	<!-- jboss deploy -->
-	<property name="jboss.home" value="/usr/share/jboss-as-7.1.1.final" />
+	<property name="jboss.home" value="/usr/share/jboss-as" />
 	<property name="jboss.deploy.dir" value="${jboss.home}/standalone/deployments" />
 	<property name="jboss.deploy.war" value="${jboss.deploy.dir}/${project.name}.war" />
 
@@ -61,7 +61,7 @@
 		</waitfor>
 		<delete dir="${jboss.deploy.war}" />
 
-		<copy file="${build.dir}/${project.name}.war" todir="${jboss.deploy.dir}" />
+		<copy file="/${project.name}.war" todir="${jboss.deploy.dir}" />
 
 		<touch file="${jboss.deploy.war}.dodeploy" />
 
