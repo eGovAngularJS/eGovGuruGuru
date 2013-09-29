@@ -1,5 +1,7 @@
 package egovframework.com.guruguru.dashboard.user.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class UserInfo {
 
 	private String userId;
@@ -51,5 +53,10 @@ public class UserInfo {
 	}
 	public void setLastModifyDate(String lastModifyDate) {
 		this.lastModifyDate = lastModifyDate;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="visitor">
+
+	<select id="selectVisitorList" parameterType="searchMap" resultType="egovframework.com.guruguru.dashboard.visit.vo.Visitor">
+		SELECT ACCESS_DATE AS accessDate,
+			   ACCESS_TIME AS accessTime,
+			   USER_ID AS userId
+		  FROM TB_VISITOR
+		  
+		<trim prefix="WHERE" prefixOverrides="AND | OR ">
+			<if test="accessDate != NULL"> ACCESS_DATE = #{accessDate} </if>
+			<if test="accessTime != NULL"> AND ACCESS_TIME = #{accessTime} </if>
+		</trim>
+		  
+	</select>
+	
+</mapper>
