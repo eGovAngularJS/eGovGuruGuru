@@ -49,7 +49,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/egovframework.rte.ptl.mvc-2.6.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ehcache-core-2.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ehcache-terracotta-2.1.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/guava-14.0.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-validator-4.2.0.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-validator-annotation-processor-4.2.0.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/icu4j-4.8.jar"/>
