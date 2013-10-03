@@ -6,11 +6,11 @@
 	<select id="selectUserInfoList" parameterType="searchMap" resultType="egovframework.com.guruguru.dashboard.user.vo.UserInfo">
 		SELECT USER_ID AS userId,
 			   USER_NAME AS userName,
-			   CITY as city,
-			   GENDER as gender,
-			   AGE as age,
-			   FIRST_CREATE_DATE as firstCreateDate,
-			   LAST_MODIFY_DATE as lastModifyDate
+			   CITY AS city,
+			   GENDER AS gender,
+			   AGE AS age,
+			   FIRST_CREATE_DATE AS firstCreateDate,
+			   LAST_MODIFY_DATE AS lastModifyDate
 		  FROM TB_USER_INFO
 		  
 	</select>
