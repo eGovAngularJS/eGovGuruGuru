@@ -1,3 +1,78 @@
+/* 그리드 테마 변경 */
+.eGovGrid-container.ui-widget{
+  font-family: inherit;
+  font-size: inherit;
+}
+.eGovGrid-container {
+  background: initial;
+  outline: 0;
+  border: none;
+}
+
+.slick-header.ui-state-default {
+   background: rgba(51,51,51,0.25);
+   border:none;
+}
+.slick-header-columns {
+  font-weight: 300;
+  color: #fff;
+  background: initial;
+  border: none;
+}
+
+.slick-header-column.ui-state-default {
+  background: initial;
+  font-weight: 300;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  height: 22px;
+  line-height: 20px;
+}
+.slick-row{
+  background: rgba(51,51,51,0.35);
+  border: none;
+  color: white;
+}
+.slick-row.odd{
+  background: rgba(51,51,51,0.25);
+  border: none;
+}
+.slick-cell, .slick-headerrow-column {
+  padding: 8px;
+  line-height: 20px;
+  border: none;
+}
+.slick-cell.active {
+  background-color: rgba(97, 143, 176, 0.05);
+  outline: 1px solid #618fb0;
+  border: none;
+  outline-offset: -1px;
+/*  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;*/
+  -webkit-transition-duration: 200ms;
+  -moz-transition-duration: 200ms;
+  -o-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: width, outline, background-color;
+  -moz-transition-property: width, outline, background-color;
+  -o-transition-property: width, outline, background-color;
+  transition-property: width, outline, background-color;
+  -webkit-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+.slick-header-column:hover, .slick-header-column-active {
+  background: rgba(51,51,51,0.35);
+  /*background: white url('../images/grid/header-columns-over-bg.gif') repeat-x center bottom;*/
+}
+
+.slick-headerrow {
+ 
+}
+
 @import url(font-awesome.min.css);
 @font-face {
   font-family: 'Open Sans';

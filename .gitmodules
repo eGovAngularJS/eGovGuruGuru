@@ -1,0 +1,3 @@
+[submodule "WebContent/vendor/egovNg"]
+	path = WebContent/vendor/egovNg
+	url = git@github.com:eGovAngularJS/eGovNg.git
