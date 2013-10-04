@@ -1,12 +1,150 @@
-<!DOCTYPE html>
-<html>
-	<head>
-    	<meta charset="utf-8">
-	    <meta name="description" content="guruguru">
-	    <meta name="author" content="guruguru">
-	    <title>GuruGuru</title>
-  	</head>
-  	<body>
-    	<h1>GuruGuru</h1>
-	</body>
+<!doctype html>
+<html lang="ko" ng-app="egovNgDashboard">
+<head>
+	<meta charset="UTF-8">
+	<title>eGov AngularJS DEMO Dashboard</title>
+	<link rel="stylesheet" href="vendor/bootstrap-3.0.0/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="vendor/slickGrid/slick.grid.css">
+	<link rel="stylesheet" href="vendor/slickGrid/css/smoothness/jquery-ui-1.8.16.custom.css">
+	<link rel="stylesheet" href="vendor/egovNg/build/css/eGovNg.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
+	<script src="vendor/holder-2.1.0/holder.min.js"></script>
+	<script src="vendor/angular/angular.js"></script>
+	<script src="vendor/slickGrid/slick.core.js"></script>
+	<script src="vendor/slickGrid/slick.grid.js"></script>
+	<script src="vendor/egovNg/build/eGovNg.js"></script>
+	<script src="app.js"></script>
+</head>
+<body class="background-dark sidebar-hidden" style="zoom: 1;" ng-controller="mainCtrl">
+	<div class="logo">
+	    <h4><a href="">eGov <strong>AngularJS</strong> Dashboard</a></h4>
+	</div>
+	<div class="wrap">
+  <header class="page-header">
+   <div class="navbar">
+   </div>
+  </header>
+  <div class="content container">
+  	<div class="row">
+    <div class="col-md-12">
+     <h2 class="page-title">대시보드 <small>easy and fun</small></h2>
+    </div>
+   </div>
+   <div class="row">
+   	<div class="col-md-8">
+     <widget icon="icon-file-alt" title='테스트' small-title="테스트 small">
+     	<div egov-grid name="demoGrid2" dataset="userList" style="height:500px;">
+     		<table>
+		      <thead>
+		        <tr>
+		          <th>이름</th>
+		          <th>이메일</th>
+		          <th>등록일</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr>
+		          <td>{{name}}</td>
+		          <td>{{email}}</td>
+		          <td>{{regDate}}</td>
+		        </tr>
+		      </tbody>
+			    </table>
+     	</div>
+     </widget>
+     <section class="widget">
+						<header>
+						 <h4>
+						   <i class="icon-shopping-cart"></i>
+						   테스트
+						   <small>
+						       그래프
+						   </small>
+						 </h4>
+						</header>
+						<div class="body">
+							<div egov-grid name="demoGrid" dataset="userList" style="height:500px;">
+     		<table>
+		      <thead>
+		        <tr>
+		          <th>이름</th>
+		          <th>이메일</th>
+		          <th>등록일</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr>
+		          <td>{{name}}</td>
+		          <td>{{email}}</td>
+		          <td>{{regDate}}</td>
+		        </tr>
+		      </tbody>
+			    </table>
+     	</div>
+       <!-- <table class="table table-striped no-margin sources-table">
+        <thead>
+         <tr>
+          <th class="source-col-header">지역</th>
+          <th>누적</th>
+          <th>변화수치</th>
+          <th>추세</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td><span class="label label-important">서울</span></td>
+          <td>1033</td>
+          <td><strong class="color-green">+203</strong></td>
+          <td>그래프</td>
+         </tr>
+         <tr>
+          <td><span class="label label-important">부산</span></td>
+          <td>423</td>
+          <td><strong class="color-green">-203</strong></td>
+          <td>그래프</td>
+         </tr>
+         <tr>
+          <td><span class="label label-important">대구</span></td>
+          <td>33</td>
+          <td><strong class="color-green">+13</strong></td>
+          <td>그래프</td>
+         </tr>
+         <tr>
+          <td><span class="label label-important">대전</span></td>
+          <td>22</td>
+          <td><strong class="color-green">+203</strong></td>
+          <td>그래프</td>
+         </tr>
+        </tbody>
+       </table> -->
+      </div>   	
+     </section>
+    </div>
+    <div class="col-md-4">
+     <section class="widget widget-tabs">
+		    <header>
+		        <ul class="nav nav-tabs">
+		            <li class="active">
+		                <a href="#age" data-toggle="tab">나이</a>
+		            </li>
+		            <li>
+		                <a href="#gender" data-toggle="tab">성별</a>
+		            </li>
+		        </ul>
+		    </header>
+		    <div class="body tab-content">
+       <div id="stats" class="tab-pane active clearfix">
+          <h5 class="tab-header"><i class="icon-group"></i>나이대 접속율</h5>
+          그래프?
+      	</div>
+		    </div>
+					</section>
+    </div>
+   </div>
+  </div>
+ </div>
+</body>
 </html>
