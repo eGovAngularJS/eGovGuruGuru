@@ -130,17 +130,17 @@ angular.module('egovNgDashboard', ['egov.ui']).
 			scope: true,
 			template: function (i, tEl) {
 				var template = '<section class="widget"> \
-															     	<header> \
-															        <h4> \
-															         <i class="icon-group"></i> \
-															         <small> \
-															             테스트 \
-															         </small> \
-															        </h4> \
-															      </header> \
-															      <div class="body">'+tEl+
-															      '</div> \
-															     </section>';
+    						     	<header> \
+    						        <h4> \
+    						         <i class="icon-group"></i> \
+    						         <small> \
+    						             테스트 \
+    						         </small> \
+    						        </h4> \
+    						      </header> \
+    						      <div class="body">'+tEl+
+    						      '</div> \
+    						     </section>';
 				return template;
 			},
 			compile: function(tElement, tAttrs){

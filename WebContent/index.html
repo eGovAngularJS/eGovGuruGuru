@@ -37,64 +37,66 @@
    </div>
 	<!-- 서버 상태정보 -->
 	<div class="row">
-		<widget icon="icon-file-alt" title='테스트' small-title="테스트 small">
-			<div class="col-md-3" height="200">
-				<egov-pie-chart
-	          data="s1"
-	          id="s1"
-	          width="180"
-	          height="130"
-	          x="xFunction()"
-	          y="yFunction()"
-	          margin="{left:0,top:0,bottom:0,right:0}"
-	          showLabels="true"
-	          labelType="percent"
-	          donut="true"
-	          donutRatio=".5"
-	          donutLabelsOutside="true"
-	          >
-	            <svg height="130"></svg>
-	      </egov-pie-chart>
-	    </div>
-	    <div class="col-md-3">
-	      <div class="percentage easyPieChart" 
-	          egov-easy-pie-chart="scaleColor:false;
-	                lineWidth:16;
-	                lineCap:square;
-	                size:110;
-	                trackColor:#e5e5e5;
-	                barColor:#3da0ea" 
-	          percent="percent1" 
-	          style="width: 110px; height: 110px; line-height: 110px;">
-	      </div>
-	    </div>
-	    <div class="col-md-3">
-				<div class="percentage easyPieChart" 
-		        egov-easy-pie-chart="scaleColor:false;
-		              lineWidth:16;
-		              lineCap:square;
-		              size:110;
-		              trackColor:#e5e5e5;
-		              barColor:#e88c08" 
-		        percent="percent2" 
-		        style="width: 110px; height: 110px; line-height: 110px;">
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="percentage easyPieChart" 
-            egov-easy-pie-chart="scaleColor:false;
-                  lineWidth:16;
-                  lineCap:square;
-                  size:110;
-                  trackColor:#e5e5e5;
-                  barColor:#b9d000" 
-            percent="percent3" 
-            style="width: 110px; height: 110px; line-height: 110px;">
-        </div>
-			</div>
-		</widget>
-		
-		
+		<div class="col-md-12">
+			<widget icon="icon-file-alt" title='테스트' small-title="테스트 small">
+				<div class="row">
+					<div class="col-md-3" height="200">
+						<egov-pie-chart
+			          data="s1"
+			          id="s1"
+			          width="180"
+			          height="130"
+			          x="xFunction()"
+			          y="yFunction()"
+			          margin="{left:0,top:0,bottom:0,right:0}"
+			          showLabels="true"
+			          labelType="percent"
+			          donut="true"
+			          donutRatio=".5"
+			          donutLabelsOutside="true"
+			          >
+			            <svg height="130"></svg>
+			      </egov-pie-chart>
+			    </div>
+			    <div class="col-md-3">
+			      <div class="percentage easyPieChart" 
+			          egov-easy-pie-chart="scaleColor:false;
+			                lineWidth:16;
+			                lineCap:square;
+			                size:110;
+			                trackColor:#e5e5e5;
+			                barColor:#3da0ea" 
+			          percent="percent1" 
+			          style="width: 110px; height: 110px; line-height: 110px;">
+			      </div>
+			    </div>
+			    <div class="col-md-3">
+						<div class="percentage easyPieChart" 
+				        egov-easy-pie-chart="scaleColor:false;
+				              lineWidth:16;
+				              lineCap:square;
+				              size:110;
+				              trackColor:#e5e5e5;
+				              barColor:#e88c08" 
+				        percent="percent2" 
+				        style="width: 110px; height: 110px; line-height: 110px;">
+				    </div>
+				  </div>
+				  <div class="col-md-3">
+				    <div class="percentage col-md-3 easyPieChart" 
+		            egov-easy-pie-chart="scaleColor:false;
+		                  lineWidth:16;
+		                  lineCap:square;
+		                  size:110;
+		                  trackColor:#e5e5e5;
+		                  barColor:#b9d000" 
+		            percent="percent3" 
+		            style="width: 110px; height: 110px; line-height: 110px;">
+		        </div>
+					</div>
+				</div>
+				</widget>
+		</div>		
 	</div>
 
 	<!-- chart -->
@@ -172,92 +174,44 @@
 			    </table>
      	</div>
      </widget>
-     <section class="widget">
-						<header>
-						 <h4>
-						   <i class="icon-shopping-cart"></i>
-						   테스트
-						   <small>
-						       그래프
-						   </small>
-						 </h4>
-						</header>
-						<div class="body">
-							<div egov-grid name="demoGrid" dataset="userList" style="height:500px;">
-     		<table>
-		      <thead>
-		        <tr>
-		          <th>이름</th>
-		          <th>이메일</th>
-		          <th>등록일</th>
-		        </tr>
-		      </thead>
-		      <tbody>
-		        <tr>
-		          <td>{{name}}</td>
-		          <td>{{email}}</td>
-		          <td>{{regDate}}</td>
-		        </tr>
-		      </tbody>
-			    </table>
-     	</div>
-       <!-- <table class="table table-striped no-margin sources-table">
-        <thead>
-         <tr>
-          <th class="source-col-header">지역</th>
-          <th>누적</th>
-          <th>변화수치</th>
-          <th>추세</th>
-         </tr>
-        </thead>
-        <tbody>
-         <tr>
-          <td><span class="label label-important">서울</span></td>
-          <td>1033</td>
-          <td><strong class="color-green">+203</strong></td>
-          <td>그래프</td>
-         </tr>
-         <tr>
-          <td><span class="label label-important">부산</span></td>
-          <td>423</td>
-          <td><strong class="color-green">-203</strong></td>
-          <td>그래프</td>
-         </tr>
-         <tr>
-          <td><span class="label label-important">대구</span></td>
-          <td>33</td>
-          <td><strong class="color-green">+13</strong></td>
-          <td>그래프</td>
-         </tr>
-         <tr>
-          <td><span class="label label-important">대전</span></td>
-          <td>22</td>
-          <td><strong class="color-green">+203</strong></td>
-          <td>그래프</td>
-         </tr>
-        </tbody>
-       </table> -->
-      </div>   	
-     </section>
     </div>
     <div class="col-md-4">
-     <section class="widget widget-tabs">
-		    <header>
-		        <ul class="nav nav-tabs">
-		            <li class="active">
-		                <a href="#age" data-toggle="tab">나이</a>
-		            </li>
-		            <li>
-		                <a href="#gender" data-toggle="tab">성별</a>
-		            </li>
-		        </ul>
-		    </header>
-		    <div class="body tab-content">
-	        <div id="stats" class="tab-pane active clearfix">
-	          <h5 class="tab-header"><i class="icon-group"></i>나이대 접속율</h5>
-	          <egov-pie-chart
-	              data="dAge"
-	              id="dAge"
+	    <section class="widget widget-tabs">
+	     	<div egov-tab>
+					<egov-panel>
+					  <egov-tab-heading>
+					  	<i class="icon-bell"></i>나이대 접속율
+					  </egov-tab-heading>
+					  <div class="body">
+					  	<egov-pie-chart
+		              data="dAge"
+		              id="dAge"
+		              width="350"
+		              height="350"
+		              x="xFunction()"
+		              y="yFunction()"
+		              margin="{left:0,top:0,bottom:0,right:0}"
+		              showLabels="true"
+		              labelType="percent"
+		              showLegend="true"
+		              donut="true"
+		              donutRatio=".5"
+		              donutLabelsOutside="true"
+		              tooltips="true"
+		              tooltipcontent="toolTipContentFunction()"
+		              >
+		            <svg height="350"></svg>
+		          </egov-pie-chart>
+					  </div>
+					</egov-panel>
+					<egov-panel>
+					  <egov-tab-heading>
+					  	<i class="icon-bell"></i>성별 접속율
+					  </egov-tab-heading>
+					  <div class="body">
+					  	<egov-pie-chart
+	              data="dSex"
+	              id="dSex"
 	              width="350"
 	              height="350"
 	              x="xFunction()"
@@ -272,32 +226,11 @@
 	              tooltips="true"
 	              tooltipcontent="toolTipContentFunction()"
 	              >
-	                  <svg height="350"></svg>
-	          </egov-pie-chart>
-	      	</div>
-	      	<div id="stats2" class="tab-pane active clearfix">
-	          <h5 class="tab-header"><i class="icon-group"></i>성별 접속율</h5>
-	          <egov-pie-chart
-              data="dSex"
-              id="dSex"
-              width="350"
-              height="350"
-              x="xFunction()"
-              y="yFunction()"
-              margin="{left:0,top:0,bottom:0,right:0}"
-              showLabels="true"
-              labelType="percent"
-              showLegend="true"
-              donut="true"
-              donutRatio=".5"
-              donutLabelsOutside="true"
-              tooltips="true"
-              tooltipcontent="toolTipContentFunction()"
-              >
-                  <svg height="350"></svg>
-          	</egov-pie-chart>
-	      	</div>
-		    </div>
+	              <svg height="350"></svg>
+	          	</egov-pie-chart>
+					  </div>
+					</egov-panel>
+				</div>
 			</section>
     </div>
    </div>
