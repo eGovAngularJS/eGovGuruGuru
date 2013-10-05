@@ -1,3 +1,22 @@
+/* 차트 관련 CSS */
+.easyPieChart {
+    position: relative;
+    text-align: center;
+}
+
+.easyPieChart canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.percentage,
+.label {
+    text-align: center;
+    color: #333;
+    font-weight: 100;
+    font-size: 1.2em;
+    margin-bottom: 0.3em;
+}
 /* 그리드 테마 변경 */
 .eGovGrid-container.ui-widget{
   font-family: inherit;
