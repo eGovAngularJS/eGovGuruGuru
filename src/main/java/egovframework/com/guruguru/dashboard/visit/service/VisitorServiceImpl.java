@@ -1,5 +1,6 @@
 package egovframework.com.guruguru.dashboard.visit.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +17,34 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 	@Autowired
 	private CommonDao commonDao;
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Map<String, Object>> retrieveVistCountInfo(Map param) {
+		List<Map<String, Object>> visitCountList = commonDao.selectList("selectVisitCountInfo", param);
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+		
+		for (Map<String, Object> visitMap : visitCountList) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put(String.valueOf(visitMap.get("period")), visitMap.get("cnt"));
+			
+			resultList.add(map);
+		}
+		
+		return resultList;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Map<String, Object> retrieveAgeCountInfo(Map param) {
 		return commonDao.selectObject("visitor.selectAgeCountInfo", param);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Map<String, Object> retrieveGenderCountInfo(Map param) {
 		List<Map<String, Object>> genderCountList = commonDao.selectList("visitor.selectGenderCntInfo", param);
 		List<Map<String, Object>> genderUniqueCountList = commonDao.selectList("visitor.selectGenderUniqueCntInfo", param);

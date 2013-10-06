@@ -3,17 +3,28 @@
 
 <mapper namespace="visitor">
 	
-	<select id="selectAgeCountInfo" parameterType="searchMap" resultType="resultMap">
-		SELECT SUM(CASE WHEN TUI.AGE &lt; 10 THEN 1 ELSE 0 END) AS A0,
-			   SUM(CASE WHEN TUI.AGE &lt; 20 AND TUI.AGE &gt;= 10 THEN 1 ELSE 0 END) AS A1,
-			   SUM(CASE WHEN TUI.AGE &lt; 30 AND TUI.AGE &gt;= 20 THEN 1 ELSE 0 END) AS A2,
-			   SUM(CASE WHEN TUI.AGE &lt; 40 AND TUI.AGE &gt;= 30 THEN 1 ELSE 0 END) AS A3,
-			   SUM(CASE WHEN TUI.AGE &lt; 50 AND TUI.AGE &gt;= 40 THEN 1 ELSE 0 END) AS A4,
-			   SUM(CASE WHEN TUI.AGE &gt;= 50 THEN 1 ELSE 0 END) AS A5
-		  FROM TB_USER_INFO TUI,
-		  	   (SELECT T.USER_ID
-		  	      FROM TB_VISITOR T
-		  	      		  	   
+	<select id="selectVisitCountInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT
+		<choose>
+			<when test="dd != NULL">
+			   HH AS PERIOD,
+			</when>
+			<when test="mm != NULL">
+			   DD AS PERIOD,
+			</when>
+			<otherwise>
+			   MM AS PERIOD,
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="option != null">
+			   COUNT(DISTINCT USER_ID) AS CNT
+			</when>
+			<otherwise>
+			   COUNT(*) AS CNT	
+			</otherwise>
+		</choose>
+		  FROM TB_VISITOR TV
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="yyyy != NULL"> 
 				YYYY = #{yyyy} 
@@ -25,7 +36,41 @@
 				AND DD = #{dd} 
 			</if>
 		</trim>
-		  	   
+		 GROUP BY
+		 <choose>
+			<when test="dd != NULL">
+			      HH
+			</when>
+			<when test="mm != NULL">
+			   	  DD
+			</when>
+			<otherwise>
+			   	  MM
+			</otherwise>
+		</choose>	 
+	</select>
+	
+	<select id="selectAgeCountInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT SUM(CASE WHEN TUI.AGE &lt; 10 THEN 1 ELSE 0 END) AS A0,
+			   SUM(CASE WHEN TUI.AGE &lt; 20 AND TUI.AGE &gt;= 10 THEN 1 ELSE 0 END) AS A1,
+			   SUM(CASE WHEN TUI.AGE &lt; 30 AND TUI.AGE &gt;= 20 THEN 1 ELSE 0 END) AS A2,
+			   SUM(CASE WHEN TUI.AGE &lt; 40 AND TUI.AGE &gt;= 30 THEN 1 ELSE 0 END) AS A3,
+			   SUM(CASE WHEN TUI.AGE &lt; 50 AND TUI.AGE &gt;= 40 THEN 1 ELSE 0 END) AS A4,
+			   SUM(CASE WHEN TUI.AGE &gt;= 50 THEN 1 ELSE 0 END) AS A5
+		  FROM TB_USER_INFO TUI,
+		  	   (SELECT T.USER_ID
+		  	      FROM TB_VISITOR T	   
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+			<if test="dd != NULL"> 
+				AND DD = #{dd} 
+			</if>
+		</trim>
 		  	   ) TV
 		 WHERE TUI.USER_ID = TV.USER_ID 
 	</select>
@@ -48,9 +93,7 @@
 				AND DD = #{dd} 
 			</if>
 		</trim>
-	
 		 GROUP BY GENDER
-		 
 	</select>
 	
 	<select id="selectGenderUniqueCntInfo" parameterType="searchMap" resultType="resultMap">
@@ -59,7 +102,6 @@
 		  FROM TB_USER_INFO TUI,
 		  	   (SELECT DISTINCT T.USER_ID
 		  	      FROM TB_VISITOR T
-		  	      		  	   
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="yyyy != NULL"> 
 				YYYY = #{yyyy} 
@@ -71,11 +113,9 @@
 				AND DD = #{dd} 
 			</if>
 		</trim>
-		  	   
 		  	   ) TV
 		 WHERE TUI.USER_ID = TV.USER_ID
 		 GROUP BY GENDER
-		 
 	</select>
 
 </mapper>
