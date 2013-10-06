@@ -1,11 +1,11 @@
 package egovframework.com.guruguru.dashboard.visit.service;
 
-import java.util.List;
-
-import egovframework.com.guruguru.dashboard.visit.vo.Visitor;
+import java.util.Map;
 
 public interface VisitorService {
+	
+	Map<String, Object> retrieveAgeCountInfo(Map param);
 
-	List<Visitor> retrieveVisitorList();
+	Map<String, Object> retrieveGenderCountInfo(Map param);
 	
 }

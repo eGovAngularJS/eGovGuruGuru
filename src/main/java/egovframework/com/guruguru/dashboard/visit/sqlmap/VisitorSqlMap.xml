@@ -2,18 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="visitor">
-
-	<select id="selectVisitorList" parameterType="searchMap" resultType="egovframework.com.guruguru.dashboard.visit.vo.Visitor">
-		SELECT ACCESS_DATE AS accessDate,
-			   ACCESS_TIME AS accessTime,
-			   USER_ID AS userId
-		  FROM TB_VISITOR
-		  
-		<trim prefix="WHERE" prefixOverrides="AND | OR ">
-			<if test="accessDate != NULL"> ACCESS_DATE = #{accessDate} </if>
-			<if test="accessTime != NULL"> AND ACCESS_TIME = #{accessTime} </if>
+	
+	<select id="selectAgeCountInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT SUM(CASE WHEN TUI.AGE &lt; 10 THEN 1 ELSE 0 END) AS A0,
+			   SUM(CASE WHEN TUI.AGE &lt; 20 AND TUI.AGE &gt;= 10 THEN 1 ELSE 0 END) AS A1,
+			   SUM(CASE WHEN TUI.AGE &lt; 30 AND TUI.AGE &gt;= 20 THEN 1 ELSE 0 END) AS A2,
+			   SUM(CASE WHEN TUI.AGE &lt; 40 AND TUI.AGE &gt;= 30 THEN 1 ELSE 0 END) AS A3,
+			   SUM(CASE WHEN TUI.AGE &lt; 50 AND TUI.AGE &gt;= 40 THEN 1 ELSE 0 END) AS A4,
+			   SUM(CASE WHEN TUI.AGE &gt;= 50 THEN 1 ELSE 0 END) AS A5
+		  FROM TB_USER_INFO TUI,
+		  	   (SELECT T.USER_ID
+		  	      FROM TB_VISITOR T
+		  	      		  	   
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+			<if test="dd != NULL"> 
+				AND DD = #{dd} 
+			</if>
 		</trim>
-		  
+		  	   
+		  	   ) TV
+		 WHERE TUI.USER_ID = TV.USER_ID 
 	</select>
 	
+	<select id="selectGenderCntInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT (SELECT TUI.GENDER
+				  FROM TB_USER_INFO TUI
+				 WHERE TUI.USER_ID = TV.USER_ID) AS GENDER,
+			   COUNT(*) AS CNT
+		  FROM TB_VISITOR TV
+		
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+			<if test="dd != NULL"> 
+				AND DD = #{dd} 
+			</if>
+		</trim>
+	
+		 GROUP BY GENDER
+		 
+	</select>
+	
+	<select id="selectGenderUniqueCntInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT TUI.GENDER,
+			   COUNT(*) AS CNT
+		  FROM TB_USER_INFO TUI,
+		  	   (SELECT DISTINCT T.USER_ID
+		  	      FROM TB_VISITOR T
+		  	      		  	   
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+			<if test="dd != NULL"> 
+				AND DD = #{dd} 
+			</if>
+		</trim>
+		  	   
+		  	   ) TV
+		 WHERE TUI.USER_ID = TV.USER_ID
+		 GROUP BY GENDER
+		 
+	</select>
+
 </mapper>
