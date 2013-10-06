@@ -6,7 +6,7 @@ public class UserInfo {
 
 	private String userId;
 	private String userName;
-	private String city;
+	private String sido;
 	private String gender;
 	private String age;
 	private String firstCreateDate;
@@ -24,11 +24,11 @@ public class UserInfo {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getCity() {
-		return city;
+	public String getSido() {
+		return sido;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setSido(String sido) {
+		this.sido = sido;
 	}
 	public String getGender() {
 		return gender;

@@ -6,7 +6,7 @@
 	<select id="selectUserInfoList" parameterType="searchMap" resultType="egovframework.com.guruguru.dashboard.user.vo.UserInfo">
 		SELECT USER_ID AS userId,
 			   USER_NAME AS userName,
-			   CITY AS city,
+			   SIDO AS sido,
 			   GENDER AS gender,
 			   AGE AS age,
 			   FIRST_CREATE_DATE AS firstCreateDate,

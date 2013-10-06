@@ -4,21 +4,35 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Visitor {
 
-	private String accessDate;
-	private String accessTime;
+	private String yyyy;
+	private String mm;
+	private String dd;
+	private String hh;
 	private String userId;
 	
-	public String getAccessDate() {
-		return accessDate;
+	public String getYyyy() {
+		return yyyy;
 	}
-	public void setAccessDate(String accessDate) {
-		this.accessDate = accessDate;
+	public void setYyyy(String yyyy) {
+		this.yyyy = yyyy;
 	}
-	public String getAccessTime() {
-		return accessTime;
+	public String getMm() {
+		return mm;
 	}
-	public void setAccessTime(String accessTime) {
-		this.accessTime = accessTime;
+	public void setMm(String mm) {
+		this.mm = mm;
+	}
+	public String getDd() {
+		return dd;
+	}
+	public void setDd(String dd) {
+		this.dd = dd;
+	}
+	public String getHh() {
+		return hh;
+	}
+	public void setHh(String hh) {
+		this.hh = hh;
 	}
 	public String getUserId() {
 		return userId;
