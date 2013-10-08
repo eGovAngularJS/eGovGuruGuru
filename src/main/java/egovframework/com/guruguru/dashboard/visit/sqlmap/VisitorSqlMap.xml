@@ -50,6 +50,50 @@
 		</choose>	 
 	</select>
 	
+	<select id="selectAreaCountInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT
+			   (SELECT TUI.SIDO
+			      FROM TB_USER_INFO TUI
+			     WHERE TUI.USER_ID = TV.USER_ID) AS AREA,
+		<choose>
+			<when test="dd != NULL">
+			   HH AS PERIOD,
+			</when>
+			<when test="mm != NULL">
+			   DD AS PERIOD,
+			</when>
+			<otherwise>
+			   MM AS PERIOD,
+			</otherwise>
+		</choose>
+			   COUNT(*) CNT
+		  FROM TB_VISITOR TV
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+			<if test="dd != NULL"> 
+				AND DD = #{dd} 
+			</if>
+		</trim>
+		 GROUP BY AREA,
+		 <choose>
+			<when test="dd != NULL">
+			      HH
+			</when>
+			<when test="mm != NULL">
+			   	  DD
+			</when>
+			<otherwise>
+			   	  MM
+			</otherwise>
+		</choose>
+		 ORDER BY 1, 2
+	</select>
+	
 	<select id="selectAgeCountInfo" parameterType="searchMap" resultType="resultMap">
 		SELECT SUM(CASE WHEN TUI.AGE &lt; 10 THEN 1 ELSE 0 END) AS A0,
 			   SUM(CASE WHEN TUI.AGE &lt; 20 AND TUI.AGE &gt;= 10 THEN 1 ELSE 0 END) AS A1,

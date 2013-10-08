@@ -57,6 +57,28 @@ public class VisitorController {
 	}
 	
 	/**
+	 * 지역별 방문자 수를 조회한다.
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return
+	 */
+	@RequestMapping("/retrieveAreaInfo")
+	@ResponseBody
+	public Map<String, Object> retrieveAreaInfo(@RequestParam(defaultValue="2013") String year,
+			@RequestParam(required=false) String month, 
+			@RequestParam(required=false) String day) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("yyyy", year);
+		param.put("mm", month);
+		param.put("dd", day);
+		
+		return visitorService.retrieveAreaCountInfo(param);
+	}
+	
+	/**
 	 * 나이별 방문자 수를 조회한다.
 	 * 
 	 * @param year
