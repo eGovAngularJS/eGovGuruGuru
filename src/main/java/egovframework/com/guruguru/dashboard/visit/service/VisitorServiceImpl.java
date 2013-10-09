@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Strings;
 
 import egovframework.com.guruguru.system.dao.CommonDao;
+import egovframework.com.guruguru.system.util.DateUtils;
 import egovframework.rte.fdl.cmmn.AbstractServiceImpl;
 
 @Service
@@ -41,8 +41,10 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 	/**
 	 * {@inheritDoc}
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, Object> retrieveAreaCountInfo(Map param) {
 		List<Map<String, Object>> areaCountList = commonDao.selectList("visitor.selectAreaCountInfo", param);
+		Map<String, Object> lastCountMap = retrieveAreaLastCountInfo(param);
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -65,7 +67,7 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 			if (i == 0) prevArea = tempArea;
 			
 			if (!tempArea.equals(prevArea)) {
-				processResultMap(resultMap, prevArea, sum, period);
+				processResultMap(resultMap, prevArea, sum, period, lastCountMap);
 			
 				prevArea = tempArea;
 				
@@ -80,18 +82,21 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 			sum += value;
 			
 			if (i == areaCountList.size() - 1) {				
-				processResultMap(resultMap, tempArea, sum, period);
+				processResultMap(resultMap, tempArea, sum, period, lastCountMap);
 			}
 		}
 		
 		return resultMap;
 	}
 	
-	private void processResultMap(Map<String, Object> resultMap, String area, int sum, int[] period) {
+	private void processResultMap(Map<String, Object> resultMap, String area, int sum, int[] period, Map<String, Object> lastCountMap) {
+		int lastCount = (lastCountMap.size() == 0) ? 0 : (Integer) lastCountMap.get(area);
+		
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		
 		tempMap.put("sum", sum);
 		tempMap.put("period", period);
+		tempMap.put("change", (sum - lastCount));
 		
 		resultMap.put(area, tempMap);
 	}
@@ -104,15 +109,46 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 		if (!Strings.isNullOrEmpty(day)) {
 			return 24;
 		} else if (!Strings.isNullOrEmpty(month)) {
-			return getDayOfMonth(Integer.parseInt(year), Integer.parseInt(month));
+			return DateUtils.getDayOfMonth(Integer.parseInt(year), Integer.parseInt(month));
 		} else {
 			return 12;
 		}
 	}
 	
-	private int getDayOfMonth(int year, int month) {
-		DateTime dateTime = new DateTime(year, month, 1, 0, 0);
-		return dateTime.dayOfMonth().getMaximumValue();
+	private Map<String, Object> retrieveAreaLastCountInfo(Map<String, Object> param) {
+		String day = (String) param.get("dd");
+		String month = (String) param.get("mm");
+		String year = (String) param.get("yyyy");
+		
+		Map<String, Object> args = new HashMap<String, Object>();
+		
+		if (!Strings.isNullOrEmpty(day)) {
+			String yesterday = DateUtils.getYesterDay(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+			
+			args.put("yyyy", yesterday.substring(0, 4));
+			args.put("mm", yesterday.substring(4, 6));
+			args.put("dd", yesterday.substring(6));
+			
+		} else if (!Strings.isNullOrEmpty(month)) {
+			String lastMonth = DateUtils.getLastMonth(Integer.parseInt(year), Integer.parseInt(month));
+			
+			args.put("yyyy", lastMonth.substring(0, 4));
+			args.put("mm", lastMonth.substring(4));
+			
+		} else {
+			String lastYear = DateUtils.getLastYear(Integer.parseInt(year));
+			
+			args.put("yyyy", lastYear);
+		}
+		
+		List<Map<String, Object>> areaLastCountList = commonDao.selectList("visitor.selectAreaLastCountInfo", args);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		for (Map<String, Object> areaMap : areaLastCountList) {
+			resultMap.put(String.valueOf(areaMap.get("area")), areaMap.get("cnt"));
+		}
+		
+		return resultMap;
 	}
 	
 	/**
