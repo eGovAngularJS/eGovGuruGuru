@@ -64,10 +64,14 @@ public class StateController {
 		Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(memoryInfo).iterator();
 		
 		while (it.hasNext()) {
+			System.out.println(i);
+			
 			if (i > 10) break;
 			
 			if (i > 5) {
-				map.put(memInfo[i - 6], it.next());
+				String value = it.next();
+				System.out.println("name : " + memInfo[i - 6] + " , value : " + value);
+				map.put(memInfo[i - 6], value);
 			}
 			
 			i++;
