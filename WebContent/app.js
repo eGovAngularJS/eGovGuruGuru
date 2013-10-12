@@ -8,13 +8,26 @@ angular.module('egovNgDashboard', ['egov.ui']).
 		egovGridFormatterProvider.setFormatatter("waitting",function (row, cell, value, columnDef, dataContext) {
     	return "기달려주세요..";
     });
+
+    egovGridFormatterProvider.setFormatatter("change",function (row, cell, value, columnDef, dataContext) {
+    	var text = Math.abs(value),
+    			css = "icon-caret-down color-red", 
+    			css = "icon-caret-down color-red"; 
+
+    	if(value > 0){
+    		css = "icon-caret-up color-green";
+    	}
+
+    	return "<div class='value'><i class='"+css+"'></i> "+text+"</div>";
+    });
 	}]).
 	controller('mainCtrl', ['$scope','$http', function ($scope, $http) {
 		// 그리드 샘플 데이터
     $scope.visitListByLocaiton = [];
     
     $scope.renderSparkline = function(cellNode, row, dataContext, colDef) {
-      jQuery(cellNode).empty().sparkline(dataContext.period, { width: "100%",  });
+    	console.log(dataContext.period);
+      jQuery(cellNode).empty().sparkline(dataContext.period, { width: "100%", type: "line", fillColor : "", lineColor: '#56bc76' });
     };
 
     // 차트 샘플 데이터 
@@ -71,7 +84,7 @@ angular.module('egovNgDashboard', ['egov.ui']).
     $scope.selectType = "1";
 
     // data 조회
-    $scope.searchData = function(){
+    $scope.searchData = function(year, month, day){
     	
     	var headers = {"Content-Type" : "application/json; charset=UTF-8"};
     	
@@ -83,9 +96,9 @@ angular.module('egovNgDashboard', ['egov.ui']).
     	}
     	
     	var params = {
-			year : $scope.year,
-            month : $scope.month,
-            day : $scope.day	
+				year : year,
+        month : month,
+        day : day	
     	};
     	
       // 기간에 따른 방문자 수
@@ -194,10 +207,6 @@ directive('widget', ['$compile',function ($compile) {
 			var template = '<section class="widget"> \
   						     	<header> \
   						        <h4> \
-  						         <i class="icon-group"></i> \
-  						         <small> \
-  						             테스트 \
-  						         </small> \
   						        </h4> \
   						      </header> \
   						      <div class="body">'+tEl+
