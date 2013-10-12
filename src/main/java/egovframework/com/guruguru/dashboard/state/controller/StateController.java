@@ -13,64 +13,54 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Splitter;
 
+import egovframework.com.guruguru.system.util.NumberUtils;
+
 @Controller
 @RequestMapping("/state")
 public class StateController {
 
 	@RequestMapping("/getStateInfo")
 	@ResponseBody
-	public Map<String, Object> getStateInfo() {
-		String os = System.getProperty("os.name");
+	public Map<String, Object> getRandomStateInfo() {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		Map<String, Object> map = new HashMap<String, Object>();
+		resultMap.put("serverLoad", NumberUtils.getRandomInt(75, 90));
+		resultMap.put("usedMem", NumberUtils.getRandomInt(3350, 3500));
+		resultMap.put("processLoad", NumberUtils.getRandomInt(26, 35));
+		resultMap.put("diskLoad", NumberUtils.getRandomInt(57, 65));
+		resultMap.put("networkLoad", NumberUtils.getRandomInt(42, 56));
 		
-		if (os.equalsIgnoreCase("linux")) {
-			getMemroyInfo(map);
-		}
-		
-//		System.out.println(System.getProperty("os.name"));
-//		
-//		String line = "";
-//		
-//		try {
-//			ProcessBuilder pb = new ProcessBuilder("/bin/sh", "-c", "vmstat");
-//			Process proc = pb.start();
-//			
-//			BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-//			
-//			while ((line = br.readLine()) != null) {
-//				Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(line).iterator();
-//				
-//				while (it.hasNext()) {
-//					System.out.println(it.next());
-//				}
-//			}
-//			
-//			br.close();
-//			
-//		} catch (IOException ioe) {
-//			throw new RuntimeException(ioe.getMessage());
-//		}
-		
-		return map;
+		return resultMap;
 	}
 	
-	private void getMemroyInfo(Map<String, Object> map) {
+	@RequestMapping("/getRealStateInfo")
+	@ResponseBody
+	public Map<String, Object> getStateInfo() {		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String os = System.getProperty("os.name");
+		
+		if (os.equalsIgnoreCase("linux")) {
+			getMemroyInfo(resultMap);
+		}
+		
+		return resultMap;
+	}
+	
+	private void getMemroyInfo(Map<String, Object> paramMap) {
 		String memoryInfo = executeProcess("/bin/sh", "-c", "free");
-		
-		int i = 0;
-		
-		String[] memInfo = {"memTotal", "memUsed", "memFree", "memShared", "memBuffers"};
 		Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(memoryInfo).iterator();
 		
+		String[] memInfo = {"memTotal", "memUsed", "memFree", "memShared", "memBuffers"};		
+		
+		int i = 0;
+		int len = memInfo.length;
+		
 		while (it.hasNext()) {
-			System.out.println(i);
 			String value = it.next();
-			if (i > 10) break;
 			
-			if (i > 5) {
-				System.out.println("name : " + memInfo[i - 6] + " , value : " + value);
-				map.put(memInfo[i - 6], value);
+			if (i > len) {
+				if (i > 10) break;
+				paramMap.put(memInfo[i - (len + 1)], value);
 			}
 			
 			i++;

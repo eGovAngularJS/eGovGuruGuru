@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="code">
+	
+	<select id="selectDateCodeInfo" parameterType="searchMap" resultType="java.lang.String">
+		SELECT DISTINCT
+		<choose>
+			<when test="mm != NULL">
+			   DD AS PERIOD
+			</when>
+			<when test="yyyy != NULL">
+			   MM AS PERIOD
+			</when>
+			<otherwise>
+			   YYYY AS PERIOD
+			</otherwise>
+		</choose>
+		  FROM TB_VISITOR TV
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+		</trim>	 
+	</select>
+
+</mapper>

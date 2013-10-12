@@ -1,6 +1,5 @@
 package egovframework.com.guruguru.dashboard.visit.service;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +12,7 @@ import com.google.common.base.Strings;
 
 import egovframework.com.guruguru.system.dao.CommonDao;
 import egovframework.com.guruguru.system.util.DateUtils;
+import egovframework.com.guruguru.system.util.NumberUtils;
 import egovframework.rte.fdl.cmmn.AbstractServiceImpl;
 
 @Service
@@ -94,23 +94,21 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 	}
 	
 	private Map<String, Object> processResultMap(String area, int sum, int totalCount, int[] period, Map<String, Object> lastCountMap) {
-		int lastCount = (lastCountMap.size() == 0) ? 0 : (Integer) lastCountMap.get(area);
+		int lastCount = 0;
+		
+		if (lastCountMap != null) {
+			lastCount = (lastCountMap.size() == 0) ? 0 : (Integer) lastCountMap.get(area);
+		}
 		
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		
 		tempMap.put("location", area);
 		tempMap.put("sum", sum);
-		tempMap.put("percent", convertToDecimal(((double) sum / (double) totalCount) * 100));
+		tempMap.put("percent", NumberUtils.convertToDecimal(((double) sum / (double) totalCount) * 100));
 		tempMap.put("period", period);
 		tempMap.put("change", (sum - lastCount));
 		
 		return tempMap;
-	}
-	
-	private String convertToDecimal(double usage) {
-		DecimalFormat format = new DecimalFormat("#,##0.00");
-		
-		return format.format(usage);
 	}
 	
 	private int getPeriodCount(Map<String, Object> param) {
