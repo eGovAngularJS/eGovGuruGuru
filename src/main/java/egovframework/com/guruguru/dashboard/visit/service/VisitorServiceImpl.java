@@ -97,7 +97,7 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 		int lastCount = 0;
 		
 		if (lastCountMap != null) {
-			lastCount = (lastCountMap.size() == 0) ? 0 : (Integer) lastCountMap.get(area);
+			lastCount = (!lastCountMap.containsKey(area)) ? 0 : (Integer) lastCountMap.get(area);
 		}
 		
 		Map<String, Object> tempMap = new HashMap<String, Object>();
