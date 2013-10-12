@@ -3,7 +3,9 @@ package egovframework.com.guruguru.dashboard.state.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +19,13 @@ public class StateController {
 
 	@RequestMapping("/getStateInfo")
 	@ResponseBody
-	public String getStateInfo() {
+	public Map<String, Object> getStateInfo() {
 		String os = System.getProperty("os.name");
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if (os.equalsIgnoreCase("linux")) {
-			String memory = executeProcess("/bin/sh", "-c", "free", "-m");
-			System.out.println(memory);
+			getMemroyInfo(map);
 		}
 		
 //		System.out.println(System.getProperty("os.name"));
@@ -49,7 +52,29 @@ public class StateController {
 //			throw new RuntimeException(ioe.getMessage());
 //		}
 		
-		return "sample";
+		return map;
+	}
+	
+	private void getMemroyInfo(Map<String, Object> map) {
+		String memoryInfo = executeProcess("/bin/sh", "-c", "free");
+		
+		int i = 0;
+		
+		String[] memInfo = {"memTotal", "memUsed", "memFree", "memShared", "memBuffers"};
+		Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(memoryInfo).iterator();
+		
+		while (it.hasNext()) {
+			System.out.println(i);
+			String value = it.next();
+			if (i > 10) break;
+			
+			if (i > 5) {
+				System.out.println("name : " + memInfo[i - 6] + " , value : " + value);
+				map.put(memInfo[i - 6], value);
+			}
+			
+			i++;
+		}
 	}
 	
 	private String executeProcess(String... cmd) {
@@ -63,11 +88,7 @@ public class StateController {
 			String line = "";
 			
 			while ((line = br.readLine()) != null) {
-				Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(line).iterator();
-				
-				while (it.hasNext()) {
-					sb.append(it.next()).append(",");
-				}
+				sb.append(line);
 			}
 			
 		} catch (IOException ioe) {
