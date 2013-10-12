@@ -27,7 +27,7 @@ public interface VisitorService {
 	 * @param param
 	 * @return
 	 */
-	Map<String, Object> retrieveAreaCountInfo(Map param);
+	List<Map<String, Object>> retrieveAreaCountInfo(Map param);
 	
 	/**
 	 * 나이별 방문자 수를 조회한다.

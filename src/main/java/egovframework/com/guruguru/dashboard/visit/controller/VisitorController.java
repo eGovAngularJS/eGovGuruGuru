@@ -1,6 +1,7 @@
 package egovframework.com.guruguru.dashboard.visit.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class VisitorController {
 	 */
 	@RequestMapping("/retrieveAreaInfo")
 	@ResponseBody
-	public Map<String, Object> retrieveAreaInfo(@RequestParam(defaultValue="2013") String year,
+	public List<Map<String, Object>> retrieveAreaInfo(@RequestParam(defaultValue="2013") String year,
 			@RequestParam(required=false) String month, 
 			@RequestParam(required=false) String day) {
 		Map<String, Object> param = new HashMap<String, Object>();
