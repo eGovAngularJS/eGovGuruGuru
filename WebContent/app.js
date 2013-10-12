@@ -1,4 +1,4 @@
-/**
+﻿/**
 * egovNgDashboard Module
 *
 * Description
@@ -95,7 +95,7 @@ angular.module('egovNgDashboard', ['egov.ui']).
 	    	};
 	    	
 	        // 기간에 따른 방문자 수
-	        $http.post('/guruguru/visit/retrieveVisitInfo.do', params, headers).
+	        $http.get('visit/retrieveVisitInfo.do', {params : params, headers : headers}).
 	        success(function(data, status, headers, config){
 	            console.log("1",data);
 	            var innerGetData = function(list){
@@ -119,13 +119,13 @@ angular.module('egovNgDashboard', ['egov.ui']).
 	        });
 	        
 	        // 지역별 방문자 수
-	        $http.post('/guruguru/visit/retrieveAreaInfo.do', params, headers).
+	        $http.get('visit/retrieveAreaInfo.do', {params : params, headers : headers}).
 	        success(function(data, status, headers, config){
 	            console.log("2",data);
 	        });
 	        
 	        // 나이별 방문자 수
-	        $http.post('/guruguru/visit/retrieveAgeInfo.do', params, headers).
+	        $http.get('visit/retrieveAgeInfo.do', {params : params, headers : headers}).
 	        success(function(data, status, headers, config){
 	            console.log("3",data);
 	            $scope.dAge = [
@@ -139,7 +139,7 @@ angular.module('egovNgDashboard', ['egov.ui']).
 	        });
 	        
 	        // 성별 방문자 수
-	        $http.post('/guruguru/visit/retrieveGenderInfo.do', params, headers).
+	        $http.get('visit/retrieveGenderInfo.do', {params : params, headers : headers}).
 	        success(function(data, status, headers, config){
 	            console.log("4",data);
 	            $scope.dSex = [
