@@ -5,7 +5,7 @@
 	<title>eGov AngularJS DEMO Dashboard</title>
 	<link rel="stylesheet" href="vendor/bootstrap-3.0.0/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="vendor/slickGrid/slick.grid.css">
-    <link rel="stylesheet" href="vendor/egovNg/vendor/angularjs-nvd3-directives/examples/stylesheets/nv.d3.css"/>
+  <link rel="stylesheet" href="vendor/egovNg/vendor/angularjs-nvd3-directives/examples/stylesheets/nv.d3.css"/>
 	<link rel="stylesheet" href="vendor/slickGrid/css/smoothness/jquery-ui-1.8.16.custom.css">
 	<link rel="stylesheet" href="vendor/egovNg/build/css/eGovNg.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -17,7 +17,8 @@
 	<script src="vendor/slickGrid/slick.core.js"></script>
 	<script src="vendor/slickGrid/slick.grid.js"></script>
 	<script src="vendor/d3/d3.js"></script>
-    <script src="vendor/nvd3/nv.d3.js"></script>
+  <script src="vendor/nvd3/nv.d3.js"></script>
+  <script src="vendor/jquery.sparkline/jquery.sparkline.js"></script>
 	<script src="vendor/egovNg/build/eGovNg.js"></script>
 	<script src="app.js"></script>
 </head>
@@ -60,8 +61,7 @@
 			      </egov-pie-chart>
 			    </div>
 			    <div class="col-md-3">
-			      <div class="percentage easyPieChart" 
-			          egov-easy-pie-chart="scaleColor:false;
+			      <div class="percentage easyPieChart"  egov-easy-pie-chart="scaleColor:false;
 			                lineWidth:16;
 			                lineCap:square;
 			                size:110;
@@ -152,27 +152,28 @@
 			</widget>
 		</div>
 	</div>
-
-   <div class="row">
+  <div class="row">
    	<div class="col-md-8">
      <widget icon="icon-file-alt" title='테스트' small-title="테스트 small">
-     	<div egov-grid name="demoGrid2" dataset="userList" style="height:500px;">
+     	<div egov-grid name="demoGrid2" dataset="visitListByLocaiton" style="height:500px;" enable-async-post-render="true" header-row-height="36" row-height="36">
      		<table>
 		      <thead>
 		        <tr>
-		          <th>이름</th>
-		          <th>이메일</th>
-		          <th>등록일</th>
+		          <th>지역</th>
+		          <th>누적</th>
+		          <th>변화수치</th>
+		          <th>추세</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr>
-		          <td>{{name}}</td>
-		          <td>{{email}}</td>
-		          <td>{{regDate}}</td>
+		          <td>{{location}}</td>
+		          <td>{{sum}}</td>
+		          <td>{{change}}</td>
+		          <td async-post-render="renderSparkline" formatter="waitting">{{period}}</td>
 		        </tr>
 		      </tbody>
-			    </table>
+			  </table>
      	</div>
      </widget>
     </div>
