@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,7 @@ public class StateController {
 		String os = System.getProperty("os.name");
 		
 		if (os.equalsIgnoreCase("linux")) {
-			String memory = executeProcess("/bin/sh", "-c", "free", "-m");
-			System.out.println(memory);
+			getMemroyInfo(null);
 		}
 		
 //		System.out.println(System.getProperty("os.name"));
@@ -52,6 +52,20 @@ public class StateController {
 		return "sample";
 	}
 	
+	private void getMemroyInfo(Map<String, Object> map) {
+		String memoryInfo = executeProcess("/bin/sh", "-c", "free");
+		
+		int i = 0;
+		
+		Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(memoryInfo).iterator();
+		
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
+		
+		
+	}
+	
 	private String executeProcess(String... cmd) {
 		StringBuffer sb = new StringBuffer();
 		
@@ -63,11 +77,7 @@ public class StateController {
 			String line = "";
 			
 			while ((line = br.readLine()) != null) {
-				Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(line).iterator();
-				
-				while (it.hasNext()) {
-					sb.append(it.next()).append(",");
-				}
+				sb.append(line);
 			}
 			
 		} catch (IOException ioe) {
