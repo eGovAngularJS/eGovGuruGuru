@@ -19,7 +19,7 @@ public class StateController {
 
 	@RequestMapping("/getStateInfo")
 	@ResponseBody
-	public String getStateInfo() {
+	public Map<String, Object> getStateInfo() {
 		String os = System.getProperty("os.name");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -52,7 +52,7 @@ public class StateController {
 //			throw new RuntimeException(ioe.getMessage());
 //		}
 		
-		return "";
+		return map;
 	}
 	
 	private void getMemroyInfo(Map<String, Object> map) {
