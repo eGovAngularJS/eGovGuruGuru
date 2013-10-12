@@ -1,5 +1,6 @@
 package egovframework.com.guruguru.dashboard.visit.service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +45,7 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> retrieveAreaCountInfo(Map param) {
 		List<Map<String, Object>> areaCountList = commonDao.selectList("visitor.selectAreaCountInfo", param);
+		Map<String, Object> countMap = commonDao.selectObject("visitor.selectCountInfo", param);
 		Map<String, Object> lastCountMap = retrieveAreaLastCountInfo(param);
 		
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
@@ -59,6 +61,8 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 		String prevArea = "";
 		String tempArea = "";
 		
+		int totalCount = (Integer) countMap.get("cnt");
+		
 		for (int i = 0; i < areaCountList.size(); i++) {
 			Map<String, Object> areaMap = areaCountList.get(i);
 			
@@ -67,7 +71,7 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 			if (i == 0) prevArea = tempArea;
 			
 			if (!tempArea.equals(prevArea)) {
-				result.add(processResultMap(prevArea, sum, period, lastCountMap));
+				result.add(processResultMap(prevArea, sum, totalCount, period, lastCountMap));
 			
 				prevArea = tempArea;
 				
@@ -82,24 +86,31 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 			sum += value;
 			
 			if (i == areaCountList.size() - 1) {				
-				result.add(processResultMap(tempArea, sum, period, lastCountMap));
+				result.add(processResultMap(tempArea, sum, totalCount, period, lastCountMap));
 			}
 		}
 		
 		return result;
 	}
 	
-	private Map<String, Object> processResultMap(String area, int sum, int[] period, Map<String, Object> lastCountMap) {
+	private Map<String, Object> processResultMap(String area, int sum, int totalCount, int[] period, Map<String, Object> lastCountMap) {
 		int lastCount = (lastCountMap.size() == 0) ? 0 : (Integer) lastCountMap.get(area);
 		
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		
 		tempMap.put("location", area);
 		tempMap.put("sum", sum);
+		tempMap.put("percent", convertToDecimal(((double) sum / (double) totalCount) * 100));
 		tempMap.put("period", period);
 		tempMap.put("change", (sum - lastCount));
 		
 		return tempMap;
+	}
+	
+	private String convertToDecimal(double usage) {
+		DecimalFormat format = new DecimalFormat("#,##0.00");
+		
+		return format.format(usage);
 	}
 	
 	private int getPeriodCount(Map<String, Object> param) {

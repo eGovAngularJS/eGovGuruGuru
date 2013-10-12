@@ -3,6 +3,22 @@
 
 <mapper namespace="visitor">
 	
+	<select id="selectCountInfo" parameterType="searchMap" resultType="resultMap">
+		SELECT COUNT(*) AS CNT
+		  FROM TB_VISITOR TV
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="yyyy != NULL"> 
+				YYYY = #{yyyy} 
+			</if>
+			<if test="mm != NULL"> 
+				AND MM = #{mm} 
+			</if>
+			<if test="dd != NULL"> 
+				AND DD = #{dd} 
+			</if>
+		</trim>
+	</select>
+	
 	<select id="selectVisitCountInfo" parameterType="searchMap" resultType="resultMap">
 		SELECT
 		<choose>
