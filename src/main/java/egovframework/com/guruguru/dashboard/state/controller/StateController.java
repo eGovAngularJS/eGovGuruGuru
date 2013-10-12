@@ -18,27 +18,62 @@ public class StateController {
 	@RequestMapping("/getStateInfo")
 	@ResponseBody
 	public String getStateInfo() {
-		System.out.println(System.getProperty("os.name"));
+		String os = System.getProperty("os.name");
 		
-		String line = "";
+		if (os.equalsIgnoreCase("linux")) {
+			String memory = executeProcess("/bin/sh", "-c", "free", "-m");
+			System.out.println(memory);
+		}
+		
+//		System.out.println(System.getProperty("os.name"));
+//		
+//		String line = "";
+//		
+//		try {
+//			ProcessBuilder pb = new ProcessBuilder("/bin/sh", "-c", "vmstat");
+//			Process proc = pb.start();
+//			
+//			BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+//			
+//			while ((line = br.readLine()) != null) {
+//				Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(line).iterator();
+//				
+//				while (it.hasNext()) {
+//					System.out.println(it.next());
+//				}
+//			}
+//			
+//			br.close();
+//			
+//		} catch (IOException ioe) {
+//			throw new RuntimeException(ioe.getMessage());
+//		}
+		
+		return "sample";
+	}
+	
+	private String executeProcess(String... cmd) {
+		StringBuffer sb = new StringBuffer();
 		
 		try {
-			ProcessBuilder pb = new ProcessBuilder("/bin/sh", "-c", "vmstat");
+			ProcessBuilder pb = new ProcessBuilder(cmd);
 			Process proc = pb.start();
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			String line = "";
 			
 			while ((line = br.readLine()) != null) {
 				Iterator<String> it = Splitter.on(' ').omitEmptyStrings().split(line).iterator();
 				
 				while (it.hasNext()) {
-					System.out.println(it.next());
+					sb.append(it.next()).append(",");
 				}
 			}
+			
 		} catch (IOException ioe) {
 			throw new RuntimeException(ioe.getMessage());
 		}
 		
-		return "sample";
+		return sb.toString();
 	}
 }
