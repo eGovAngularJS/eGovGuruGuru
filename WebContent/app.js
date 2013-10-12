@@ -14,7 +14,7 @@ angular.module('egovNgDashboard', ['egov.ui']).
     $scope.visitListByLocaiton = [];
     
     $scope.renderSparkline = function(cellNode, row, dataContext, colDef) {
-      jQuery(cellNode).empty().sparkline(dataContext.period, {width: "100%"});
+      jQuery(cellNode).empty().sparkline(dataContext.period, { width: "100%",  });
     };
 
     // 차트 샘플 데이터 
@@ -144,47 +144,46 @@ angular.module('egovNgDashboard', ['egov.ui']).
     	        {key: "총 접속수(여성)", y: data.womenCount}
   	        ];
       });
-      
-  };
+  	};
   
-  // chart axis 설정
-  $scope.xFunction = function(){
-      return function(d){
-          return d.key ;
-      };
-  };
-  $scope.yFunction = function(){
-      return function(d){
-          return d.y;
-      };
-  };
+	  // chart axis 설정
+	  $scope.xFunction = function(){
+	      return function(d){
+	          return d.key ;
+	      };
+	  };
+	  $scope.yFunction = function(){
+	      return function(d){
+	          return d.y;
+	      };
+	  };
 
-  $scope.xFunctionType = function(){
-      return function(d){
-          var str = "시";
-          if($scope.selectType == '1') {
-              str = "월";
-          }else if($scope.selectType == '2') {
-              str = "일";
-          }
-          return d + str;
-      };
-  };
+	  $scope.xFunctionType = function(){
+	      return function(d){
+	          var str = "시";
+	          if($scope.selectType == '1') {
+	              str = "월";
+	          }else if($scope.selectType == '2') {
+	              str = "일";
+	          }
+	          return d + str;
+	      };
+	  };
 
-  // 차트 툴팁 생성
-  $scope.toolTipContentFunction = function(){
-      return function(key, x, y, e, graph) {
-          console.log(key, x, y, e, graph);
-          return  'Super New Tooltip' +
-              '<h1>' + key + '</h1>' +
-              '<p>' +  y + ' at ' + x + '</p>';
-      };
-  };
-  
-  // 초기화 - data 처리
-  $scope.searchData();
+	  // 차트 툴팁 생성
+	  $scope.toolTipContentFunction = function(){
+	      return function(key, x, y, e, graph) {
+	          console.log(key, x, y, e, graph);
+	          return  'Super New Tooltip' +
+	              '<h1>' + key + '</h1>' +
+	              '<p>' +  y + ' at ' + x + '</p>';
+	      };
+	  };
+	  
+	  // 초기화 - data 처리
+	  $scope.searchData();
 
-}]).
+	}]).
 directive('widget', ['$compile',function ($compile) {
 	return {
 		restrict: 'EA',
