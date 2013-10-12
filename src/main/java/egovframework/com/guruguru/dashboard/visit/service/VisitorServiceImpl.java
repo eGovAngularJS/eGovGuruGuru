@@ -42,11 +42,11 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> retrieveAreaCountInfo(Map param) {
+	public List<Map<String, Object>> retrieveAreaCountInfo(Map param) {
 		List<Map<String, Object>> areaCountList = commonDao.selectList("visitor.selectAreaCountInfo", param);
 		Map<String, Object> lastCountMap = retrieveAreaLastCountInfo(param);
 		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
 		
 		int sum = 0;
 		int value = 0;
@@ -67,7 +67,7 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 			if (i == 0) prevArea = tempArea;
 			
 			if (!tempArea.equals(prevArea)) {
-				processResultMap(resultMap, prevArea, sum, period, lastCountMap);
+				result.add(processResultMap(prevArea, sum, period, lastCountMap));
 			
 				prevArea = tempArea;
 				
@@ -82,23 +82,24 @@ public class VisitorServiceImpl extends AbstractServiceImpl implements VisitorSe
 			sum += value;
 			
 			if (i == areaCountList.size() - 1) {				
-				processResultMap(resultMap, tempArea, sum, period, lastCountMap);
+				result.add(processResultMap(tempArea, sum, period, lastCountMap));
 			}
 		}
 		
-		return resultMap;
+		return result;
 	}
 	
-	private void processResultMap(Map<String, Object> resultMap, String area, int sum, int[] period, Map<String, Object> lastCountMap) {
+	private Map<String, Object> processResultMap(String area, int sum, int[] period, Map<String, Object> lastCountMap) {
 		int lastCount = (lastCountMap.size() == 0) ? 0 : (Integer) lastCountMap.get(area);
 		
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		
+		tempMap.put("location", area);
 		tempMap.put("sum", sum);
 		tempMap.put("period", period);
 		tempMap.put("change", (sum - lastCount));
 		
-		resultMap.put(area, tempMap);
+		return tempMap;
 	}
 	
 	private int getPeriodCount(Map<String, Object> param) {
