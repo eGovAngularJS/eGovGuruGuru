@@ -65,11 +65,10 @@ public class StateController {
 		
 		while (it.hasNext()) {
 			System.out.println(i);
-			
+			String value = it.next();
 			if (i > 10) break;
 			
 			if (i > 5) {
-				String value = it.next();
 				System.out.println("name : " + memInfo[i - 6] + " , value : " + value);
 				map.put(memInfo[i - 6], value);
 			}
