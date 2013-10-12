@@ -183,8 +183,9 @@
      		<table>
 		      <thead>
 		        <tr>
-		          <th>지역</th>
-		          <th>누적</th>
+		          <th>지역명</th>
+		          <th>누적수치</th>
+		          <th>비율</th>
 		          <th>변화수치</th>
 		          <th>추세</th>
 		        </tr>
@@ -193,6 +194,7 @@
 		        <tr>
 		          <td>{{location}}</td>
 		          <td>{{sum}}</td>
+		          <td formatter="percent">{{percent}}</td>
 		          <td formatter="change">{{change}}</td>
 		          <td async-post-render="renderSparkline" formatter="waitting">{{period}}</td>
 		        </tr>

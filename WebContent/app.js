@@ -9,6 +9,10 @@ angular.module('egovNgDashboard', ['egov.ui']).
     	return "기달려주세요..";
     });
 
+		egovGridFormatterProvider.setFormatatter("percent",function (row, cell, value, columnDef, dataContext) {
+    	return value+"%";
+    });
+
     egovGridFormatterProvider.setFormatatter("change",function (row, cell, value, columnDef, dataContext) {
     	var text = Math.abs(value),
     			css = "icon-caret-down color-red", 
@@ -26,7 +30,6 @@ angular.module('egovNgDashboard', ['egov.ui']).
     $scope.visitListByLocaiton = [];
     
     $scope.renderSparkline = function(cellNode, row, dataContext, colDef) {
-    	console.log(dataContext.period);
       jQuery(cellNode).empty().sparkline(dataContext.period, { width: "100%", type: "line", fillColor : "", lineColor: '#56bc76' });
     };
 
@@ -216,7 +219,6 @@ directive('widget', ['$compile',function ($compile) {
 		},
 		compile: function(tElement, tAttrs){
 			jQuery(tElement).find('h4').html('<i class="'+(tAttrs.icon || "")+'"></i> '+(tAttrs.title || "")+' <small>'+(tAttrs.smallTitle || "")+'</small>');
-			console.log(tElement);
 			return function linking($scope, iElm, iAttrs, controller){
 				
 			};
