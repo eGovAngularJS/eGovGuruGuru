@@ -60,7 +60,7 @@
 	<property name="jboss.deploy.war" value="${jboss.deploy.dir}/${project.name}.war" />
 
 	<target name="deploy" depends="war">
-		<delete file="${jboss.deploy.war}.deployed" failonerror="faslse" />
+		<delete file="${jboss.deploy.war}.deployed" failonerror="false" />
 		<waitfor maxwait="10" maxwaitunit="second">
 			<available file="${jboss.deploy.war}.undeployed" />
 		</waitfor>
