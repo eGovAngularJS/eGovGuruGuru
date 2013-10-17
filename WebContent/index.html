@@ -110,7 +110,7 @@
 							<legend class="section">검색 기준</legend>
 							<div class="form-group col-md-12">
 				    <!-- <label class="control-label" for="searchCriInfo">검색 기준</label> -->
-					    <select type="email" class="form-control" name="searchCriInfo" ng-model="selectType" placeholder="Enter email" ng-change="searchData()">
+					    <select type="email" class="form-control" name="searchCriInfo" ng-model="selectType" placeholder="Enter email" ng-change="searchData(selectType)">
 								<option value="1">Year</option>
 			          <option value="2">Month</option>
 			          <option value="3">Day</option>
@@ -147,7 +147,7 @@
 				          <option value="06">6일</option>
 				      	</select>
 						  </div>
-						  <button type="submit" class="btn btn-danger pull-right" ng-click="searchData(year, month, day)">검색</button>
+						  <button type="submit" class="btn btn-danger pull-right" ng-click="searchData(selectType, year, month, day)">검색</button>
 						</fieldset>
 					</form>	
 				</div>	
@@ -159,7 +159,16 @@
 	<div class="row">
 		<div class="col-md-12">
 			<widget icon="icon-signal" title='사용자 접속' small-title="테스트 small">
-				<egov-stacked-area-chart
+				<div egov-line2 
+                    data="v1"
+                    id="v1"
+                    color="visitsColor()"
+                    margin="{left:50,top:0,bottom:50,right:50}"
+                    height="250"
+                    xformat="xFunctionType()">
+                        <svg></svg>
+                </div>
+                <!-- <egov-stacked-area-chart
             data="v1"
             id="v1"
             width="800"
@@ -170,7 +179,7 @@
             interactive="true"
             tooltips="true">
                 <svg height="250"></svg>
-        </egov-stacked-area-chart>
+        </egov-stacked-area-chart> -->
 			</widget>
 		</div>
 	</div>

@@ -87,14 +87,17 @@ angular.module('egovNgDashboard', ['egov.ui']).
     $scope.selectType = "1";
 
     // data 조회
-    $scope.searchData = function(year, month, day){
+    $scope.searchData = function(selectType, year, month, day){
     	
     	var headers = {"Content-Type" : "application/json; charset=UTF-8"};
-    	
-    	if($scope.selectType == '1') {
+    	$scope.selectType = selectType;
+    	if(angular.isUndefined(selectType)){
+    		$scope.selectType = "1";
+    	}
+    	if($scope.selectType == "1") {
     		$scope.month = null;
     		$scope.day = null;
-    	}else if($scope.selectType == '2') {
+    	}else if($scope.selectType == "2") {
     		$scope.day = null;
     	}
     	
@@ -123,7 +126,7 @@ angular.module('egovNgDashboard', ['egov.ui']).
           	return _list;
           };
           $scope.v1 = [
-                {"key": "unique", "values": innerGetData(data.unique)},
+                {"key": "unique", "values": innerGetData(data.unique), "area":true},
                 {"key": "visit"	, "values": innerGetData(data.visit)}
             ];
       });
@@ -161,6 +164,13 @@ angular.module('egovNgDashboard', ['egov.ui']).
   	        ];
       });
   	};
+
+    // 차트 색상
+    $scope.visitsColor = function(){
+        return [
+            "#eac85e", "#cf6d51"
+        ];
+    };
   
 	  // chart axis 설정
 	  $scope.xFunction = function(){
