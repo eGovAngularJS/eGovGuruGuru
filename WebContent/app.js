@@ -85,11 +85,20 @@ angular.module('egovNgDashboard', ['egov.ui']).
     $scope.month = null;
     $scope.day = null;
     $scope.selectType = "1";
+    
+    $scope.s1 = 0;
+    $scope.s2 = 0;
+    $scope.s3 = 0;
+    $scope.s4 = 0;
+    $scope.s5 = 0;
+    
+    
+    // 통신 해더정보 설정
+    var headers = {"Content-Type" : "application/json; charset=UTF-8"};
 
     // data 조회
     $scope.searchData = function(selectType, year, month, day){
     	
-    	var headers = {"Content-Type" : "application/json; charset=UTF-8"};
     	$scope.selectType = selectType;
     	if(angular.isUndefined(selectType)){
     		$scope.selectType = "1";
@@ -199,7 +208,7 @@ angular.module('egovNgDashboard', ['egov.ui']).
 	  // 차트 툴팁 생성
 	  $scope.toolTipContentFunction = function(){
 	      return function(key, x, y, e, graph) {
-	          console.log(key, x, y, e, graph);
+	          //console.log(key, x, y, e, graph);
 	          return  'Super New Tooltip' +
 	              '<h1>' + key + '</h1>' +
 	              '<p>' +  y + ' at ' + x + '</p>';
@@ -207,6 +216,17 @@ angular.module('egovNgDashboard', ['egov.ui']).
 	  };
 	  
 	  // 초기화 - data 처리
+	  // 서버 상태 정보 조회
+      $http.get('state/getStateInfo.do', {headers : headers}).
+      success(function(data, status, headers, config){
+          console.log("status",data, $scope);
+          $scope.s1 = data.serverLoad;
+          $scope.s2 = data.usedMem;
+          $scope.s3 = data.processLoad;
+          $scope.s4 = data.diskLoad;
+          $scope.s5 = data.networkLoad;
+      });
+      // 기본 방문 정보 조회
 	  $scope.searchData();
 
 	}]).

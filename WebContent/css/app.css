@@ -41,22 +41,33 @@ svg text {
 	border-bottom: none;
 }
 
-
-.easyPieChart {
+div.pie-chart {
+	text-align: center;
+}
+div.pie-chart .easyPieChart {
     position: relative;
     text-align: center;
+    font-size: 18px;
+	font-weight: 300;
+	display: inline-block;
 }
 
-.easyPieChart canvas {
+div.pie-chart .easyPieChart canvas {
     position: absolute;
     top: 0;
     left: 0;
 }
+
+div.pie-chart div.caption {
+	font-size: 15px;
+	margin-top: 10px; 
+	font-weight: 300;
+}
 .percentage,
 .label {
     text-align: center;
-    color: #333;
-    font-weight: 100;
+    /* color: #333; */
+    font-weight: 300;
     font-size: 1.2em;
     margin-bottom: 0.3em;
 }
@@ -652,7 +663,7 @@ input.parsley-error {
   padding: 10px 12px;
   color: #f8f8f8;
   background: rgba(51, 51, 51, 0.4);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   position: relative;
 }
 .widget.normal {
