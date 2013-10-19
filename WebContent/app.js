@@ -6,7 +6,7 @@
 angular.module('egovNgDashboard', ['egov.ui']).
 	config(['egovGridFormatterProvider', function (egovGridFormatterProvider) {
 		egovGridFormatterProvider.setFormatatter("waitting",function (row, cell, value, columnDef, dataContext) {
-    	return "기달려주세요..";
+    	return "로딩중입니다.";
     });
 
 		egovGridFormatterProvider.setFormatatter("percent",function (row, cell, value, columnDef, dataContext) {
@@ -104,16 +104,16 @@ angular.module('egovNgDashboard', ['egov.ui']).
     		$scope.selectType = "1";
     	}
     	if($scope.selectType == "1") {
-    		$scope.month = null;
-    		$scope.day = null;
+    		month = null;
+    		day = null;
     	}else if($scope.selectType == "2") {
-    		$scope.day = null;
+    		day = null;
     	}
     	
     	var params = {
 				year : year,
-        month : month,
-        day : day	
+				month : month,
+				day : day	
     	};
     	
       // 기간에 따른 방문자 수
@@ -215,18 +215,51 @@ angular.module('egovNgDashboard', ['egov.ui']).
 	      };
 	  };
 	  
+	  var getStateInfo = function(){
+		// 서버 상태 정보 조회
+	      $http.get('state/getStateInfo.do', {headers : headers}).
+	      success(function(data, status, headers, config){
+	          console.log("status",data, $scope);
+	          $scope.s1 = data.serverLoad;
+	          $scope.s2 = data.usedMem;
+	          $scope.s3 = data.processLoad;
+	          $scope.s4 = data.diskLoad;
+	          $scope.s5 = data.networkLoad;
+	      });
+	  };
+	  
+	  $scope.getSearchInfo = function(){
+			// 조회 조건 조회
+		  	if($scope.selectType == "1") {
+		  		$scope.month = null;
+		  		$scope.day = null;
+	    	}else if($scope.selectType == "2") {
+	    		$scope.day = null;
+	    	}
+	    	 
+	    	var params = {
+					year : $scope.year,
+					month : $scope.month,
+					day : $scope.day	
+	    	};
+		      $http.get('code/retrieveDateCodeList.do', {params:params, headers : headers}).
+		      success(function(data, status, headers, config){
+		          console.log("======getSearchInfo",data);
+		      });
+	}
+	  
+	  
 	  // 초기화 - data 처리
-	  // 서버 상태 정보 조회
-      $http.get('state/getStateInfo.do', {headers : headers}).
-      success(function(data, status, headers, config){
-          console.log("status",data, $scope);
-          $scope.s1 = data.serverLoad;
-          $scope.s2 = data.usedMem;
-          $scope.s3 = data.processLoad;
-          $scope.s4 = data.diskLoad;
-          $scope.s5 = data.networkLoad;
-      });
+	  
+	  // 5초마다 조회 myOptions
+	  var waitApply = null;
+	  waitApply = setInterval(function(){
+		  getStateInfo();
+		 }, 5000);
+	  
+	  getStateInfo();
       // 기본 방문 정보 조회
+	  $scope.getSearchInfo();
 	  $scope.searchData();
 
 	}]).
