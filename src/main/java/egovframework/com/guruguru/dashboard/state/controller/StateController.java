@@ -24,11 +24,12 @@ public class StateController {
 	public Map<String, Object> getRandomStateInfo() {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		resultMap.put("serverLoad", NumberUtils.getRandomInt(75, 90));
-		resultMap.put("usedMem", NumberUtils.getRandomInt(3350, 3500));
+		resultMap.put("serverLoad", NumberUtils.getRandomInt(65, 85));
+		resultMap.put("usedMem", NumberUtils.getRandomInt(3350, 3490));
 		resultMap.put("processLoad", NumberUtils.getRandomInt(26, 35));
 		resultMap.put("diskLoad", NumberUtils.getRandomInt(57, 65));
 		resultMap.put("networkLoad", NumberUtils.getRandomInt(42, 56));
+		resultMap.put("newVisitRate", NumberUtils.getRandomInt(29, 41));
 		
 		return resultMap;
 	}
