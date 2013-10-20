@@ -20,21 +20,14 @@
   <script src="vendor/nvd3/nv.d3.js"></script>
   <script src="vendor/jquery.sparkline/jquery.sparkline.js"></script>
 	<script src="vendor/egovNg/build/eGovNg.js"></script>
+	<script src="service.js"></script>
 	<script src="app.js"></script>
 </head>
 <body class="background-dark sidebar-hidden" style="zoom: 1;" ng-controller="mainCtrl">
-	<div class="logo">
-	    <h4><a href="">eGov <strong>AngularJS</strong> Dashboard</a></h4>
-	</div>
-	<div class="wrap">
-  <header class="page-header">
-   <div class="navbar">
-   </div>
-  </header>
   <div class="content container">
   	<div class="row">
     <div class="col-md-12">
-     <h2 class="page-title">대시보드 <small>easy and fun</small></h2>
+     <h2 class="page-title">eGov <strong>AngularJS</strong> Dashboard <small> easy and fun</small></h2>
     </div>
    </div>
 	<!-- 서버 상태정보 -->
@@ -55,23 +48,6 @@
 				          	style="width: 130px; height: 130px; line-height: 130px;">
 				      	</div>
 				      	<div class="caption">Server Load</div>
-				      
-					<!--	<egov-pie-chart
-			          data="s1"
-			          id="s1"
-			          width="180"
-			          height="130"
-			          x="xFunction()"
-			          y="yFunction()"
-			          margin="{left:0,top:0,bottom:0,right:0}"
-			          showLabels="true"
-			          labelType="percent"
-			          donut="true"
-			          donutRatio=".5"
-			          donutLabelsOutside="true"
-			          >
-			            <svg height="130"></svg>
-			      </egov-pie-chart> -->
 			    </div>
 			    <div class="col-md-3 pie-chart">
 			      <div class="percentage easyPieChart"  egov-easy-pie-chart="scaleColor:false;
@@ -129,43 +105,39 @@
 							<legend class="section">검색 기준</legend>
 							<div class="form-group col-md-12">
 				    <!-- <label class="control-label" for="searchCriInfo">검색 기준</label> -->
-					    <select type="email" class="form-control" name="searchCriInfo" ng-model="selectType" placeholder="Enter email" ng-change="searchData(selectType)">
-								<option value="1">Year</option>
-			          <option value="2">Month</option>
-			          <option value="3">Day</option>
-					    </select>
+   <!--  <select type="email" class="form-control" name="searchCriInfo" ng-model="selectType" placeholder="Enter email" ng-change="searchData(selectType)">
+		<option value="1">Year</option>
+        <option value="2">Month</option>
+        <option value="3">Day</option>
+    </select> -->
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" ng-click="changeType('1');"
+        ng-class="{'btn-info': selectType=='1', 'btn-success': selectType!='1'}">월</button>
+        <button type="button" class="btn btn-primary" ng-click="changeType('2');"
+        ng-class="{'btn-info': selectType=='2', 'btn-success': selectType!='2'}">일</button>
+        <button type="button" class="btn btn-primary" ng-click="changeType('3');"
+        ng-class="{'btn-info': selectType=='3', 'btn-success': selectType!='3'}">시간</button>
+    </div>
+    
 				  		</div>
 						</fieldset>
 						<fieldset class="col-md-10">
 							<legend class="section">검색 조건</legend>
 							<div class="form-group col-md-3">
-						    <select ng-model="year" class="form-control" name="year" ng-change="getSearchInfo()">
-				          <option value="2011">2011년</option>
-				          <option value="2012">2012년</option>
-				          <option value="2013">2013년</option>
+							<select egov-select-list="yearList" ng-model="year" class="form-control"
+							     ng-change="getSearchInfo()">
 						    </select>
 						  </div>
 						  <div class="form-group col-md-3" ng-show="selectType != '1'">
-						    <select 
-						    	ng-model="month" class="form-control" name="month" ng-change="getSearchInfo()"
-						    	ng-options="value.id as value.label group by value.group for value in myOptions">
-				          <!-- <option value="01">1월</option>
-				          <option value="02">2월</option>
-				          <option value="03">3월</option>
-				          <option value="04">4월</option>
-				          <option value="05">5월</option>
-				          <option value="06">6월</option> -->
+						    <select egov-select-list="monthList" ng-model="month" class="form-control"
+                                 ng-change="getSearchInfo()">
+                            </select>
 				      	</select>
 						  </div>
 						  <div class="form-group col-md-3" ng-show="selectType == '3'">
-				      	<select ng-model="day" class="form-control" name="month">
-				          <option value="01">1일</option>
-				          <option value="02">2일</option>
-				          <option value="03">3일</option>
-				          <option value="04">4일</option>
-				          <option value="05">5일</option>
-				          <option value="06">6일</option>
-				      	</select>
+						  <select egov-select-list="dayList" ng-model="day" class="form-control"
+                                 ng-change="getSearchInfo()">
+                            </select>
 						  </div>
 						  <button type="submit" class="btn btn-danger pull-right" ng-click="searchData(selectType, year, month, day)">검색</button>
 						</fieldset>
@@ -207,8 +179,8 @@
 	<!-- 지역별 접속율 및 나이대 접속율 / 접속율 -->
   <div class="row">
    	<div class="col-md-8">
-     <widget icon="icon-globe" title='지역별 접속율' small-title="접속 추세율">
-     	<div egov-grid name="demoGrid2" dataset="visitListByLocaiton" style="height:500px;" enable-async-post-render="true" header-row-height="36" row-height="36">
+     <widget icon="icon-globe" title='지역별 접속율' small-title="접속 추세율" >
+     	<div egov-grid name="demoGrid2" dataset="visitListByLocaiton" style="height:380px;" enable-async-post-render="true" header-row-height="36" row-height="36">
      		<table>
 		      <thead>
 		        <tr>
@@ -216,7 +188,7 @@
 		          <th>누적수치</th>
 		          <th>비율</th>
 		          <th>변화수치</th>
-		          <th>추세</th>
+		          <th width="300">추세</th>
 		        </tr>
 		      </thead>
 		      <tbody>
@@ -225,7 +197,7 @@
 		          <td>{{sum}}</td>
 		          <td formatter="percent">{{percent}}</td>
 		          <td formatter="change">{{change}}</td>
-		          <td async-post-render="renderSparkline" formatter="waitting">{{period}}</td>
+		          <td width="300" async-post-render="renderSparkline" formatter="waitting">{{period}}</td>
 		        </tr>
 		      </tbody>
 			  </table>
@@ -235,7 +207,7 @@
     <div class="col-md-4">
 	    <section class="widget widget-tabs">
 	     	<div egov-tab>
-					<egov-panel>
+					<egov-panel panel-active="tabActive()">
 					  <egov-tab-heading>
 					  	<i class="icon-group"></i> 나이대 접속율
 					  </egov-tab-heading>
@@ -261,7 +233,7 @@
 		          </egov-pie-chart>
 					  </div>
 					</egov-panel>
-					<egov-panel>
+					<egov-panel panel-active="tabActive()">
 					  <egov-tab-heading>
 					  	<i class="icon-heart"></i> 성별 접속율
 					  </egov-tab-heading>
