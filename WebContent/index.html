@@ -1,112 +1,112 @@
 <!doctype html>
 <html lang="ko" ng-app="egovNgDashboard">
 <head>
-	<meta charset="UTF-8">
-	<title>eGov AngularJS DEMO Dashboard</title>
-	<link rel="stylesheet" href="vendor/bootstrap-3.0.0/dist/css/bootstrap.css">
-	<link rel="stylesheet" href="vendor/slickGrid/slick.grid.css">
+    <meta charset="UTF-8">
+    <title>eGov AngularJS DEMO Dashboard</title>
+    <link rel="stylesheet" href="vendor/bootstrap-3.0.0/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/slickGrid/slick.grid.css">
   <link rel="stylesheet" href="vendor/egovNg/vendor/angularjs-nvd3-directives/examples/stylesheets/nv.d3.css"/>
-	<link rel="stylesheet" href="vendor/slickGrid/css/smoothness/jquery-ui-1.8.16.custom.css">
-	<link rel="stylesheet" href="vendor/egovNg/build/css/eGovNg.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/app.css">
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
-	<script src="vendor/holder-2.1.0/holder.min.js"></script>
-	<script src="vendor/angular/angular.js"></script>
-	<script src="vendor/slickGrid/slick.core.js"></script>
-	<script src="vendor/slickGrid/slick.grid.js"></script>
-	<script src="vendor/d3/d3.js"></script>
+    <link rel="stylesheet" href="vendor/slickGrid/css/smoothness/jquery-ui-1.8.16.custom.css">
+    <link rel="stylesheet" href="vendor/egovNg/build/css/eGovNg.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
+    <script src="vendor/holder-2.1.0/holder.min.js"></script>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/slickGrid/slick.core.js"></script>
+    <script src="vendor/slickGrid/slick.grid.js"></script>
+    <script src="vendor/d3/d3.js"></script>
   <script src="vendor/nvd3/nv.d3.js"></script>
   <script src="vendor/jquery.sparkline/jquery.sparkline.js"></script>
-	<script src="vendor/egovNg/build/eGovNg.js"></script>
-	<script src="service.js"></script>
-	<script src="app.js"></script>
+    <script src="vendor/egovNg/build/eGovNg.js"></script>
+    <script src="service.js"></script>
+    <script src="app.js"></script>
 </head>
 <body class="background-dark sidebar-hidden" style="zoom: 1;" ng-controller="mainCtrl">
   <div class="content container">
-  	<div class="row">
+    <div class="row">
     <div class="col-md-12">
      <h2 class="page-title">eGov <strong>AngularJS</strong> Dashboard <small> easy and fun</small></h2>
     </div>
    </div>
-	<!-- 서버 상태정보 -->
-	<div class="row">
-		<div class="col-md-12">
-			<widget icon="icon-dashboard" title='서버 상태 정보' >
-				<div class="row">
-					 <div class="col-md-3 pie-chart">
-						 <div class="percentage easyPieChart"  
-						 	egov-easy-pie-chart="scaleColor:false;
-				                lineWidth:20;
-				                lineCap:square;
-				                size:130;
-				                addText:%;
-				                trackColor:#e5e5e5;
-				                barColor:#bacf0b" 
-				          	percent="s1" 
-				          	style="width: 130px; height: 130px; line-height: 130px;">
-				      	</div>
-				      	<div class="caption">Server Load</div>
-			    </div>
-			    <div class="col-md-3 pie-chart">
-			      <div class="percentage easyPieChart"  egov-easy-pie-chart="scaleColor:false;
-			                lineWidth:20;
-			                lineCap:square;
-			                size:130;
-			                addText:MB;
-			                maxValue:4000;
-			                trackColor:#e5e5e5;
-			                barColor:#4ec9ce" 
-			          percent="s2" 
-			          style="width: 130px; height: 130px; line-height: 130px;">
-			      </div>
-			      <div class="caption">Used RAM</div>
-			    </div>
-			    <div class="col-md-3 pie-chart">
-					<div class="percentage easyPieChart" 
-				        egov-easy-pie-chart="scaleColor:false;
-				              lineWidth:20;
-				              lineCap:square;
-				              size:130;
-			                  addText:%;
-				              trackColor:#e5e5e5;
-				              barColor:#ec7337" 
-				        percent="s3" 
-				        style="width: 130px; height: 130px; line-height: 130px;">
-				    </div>
-				    <div class="caption">Process Load</div>
-				  </div>
-				  <div class="col-md-3 pie-chart">
-			        <div class="percentage easyPieChart"  egov-easy-pie-chart="scaleColor:false;
-			                lineWidth:20;
-			                lineCap:square;
-			                size:130;
-			                addText:%;
-			                trackColor:#e5e5e5;
-			                barColor:#f377ab" 
-			          percent="s4" 
-			          style="width: 130px; height: 130px; line-height: 130px;">
-			      </div>
-			        <div class="caption">Disk Load</div>
-				</div>
-			</div>
-			</widget>
-		</div>		
-	</div>
+    <!-- 서버 상태정보 -->
+    <div class="row">
+        <div class="col-md-12">
+            <widget icon="icon-dashboard" title='서버 상태 정보' >
+                <div class="row">
+                     <div class="col-md-3 pie-chart">
+                         <div class="percentage easyPieChart"  
+                            egov-easy-pie-chart="scaleColor:false;
+                                lineWidth:20;
+                                lineCap:square;
+                                size:130;
+                                addText:%;
+                                trackColor:#e5e5e5;
+                                barColor:#bacf0b" 
+                            percent="s1" 
+                            style="width: 130px; height: 130px; line-height: 130px;">
+                        </div>
+                        <div class="caption">Server Load</div>
+                </div>
+                <div class="col-md-3 pie-chart">
+                  <div class="percentage easyPieChart"  egov-easy-pie-chart="scaleColor:false;
+                            lineWidth:20;
+                            lineCap:square;
+                            size:130;
+                            addText:MB;
+                            maxValue:4000;
+                            trackColor:#e5e5e5;
+                            barColor:#4ec9ce" 
+                      percent="s2" 
+                      style="width: 130px; height: 130px; line-height: 130px;">
+                  </div>
+                  <div class="caption">Used RAM</div>
+                </div>
+                <div class="col-md-3 pie-chart">
+                    <div class="percentage easyPieChart" 
+                        egov-easy-pie-chart="scaleColor:false;
+                              lineWidth:20;
+                              lineCap:square;
+                              size:130;
+                              addText:%;
+                              trackColor:#e5e5e5;
+                              barColor:#ec7337" 
+                        percent="s3" 
+                        style="width: 130px; height: 130px; line-height: 130px;">
+                    </div>
+                    <div class="caption">Process Load</div>
+                  </div>
+                  <div class="col-md-3 pie-chart">
+                    <div class="percentage easyPieChart"  egov-easy-pie-chart="scaleColor:false;
+                            lineWidth:20;
+                            lineCap:square;
+                            size:130;
+                            addText:%;
+                            trackColor:#e5e5e5;
+                            barColor:#f377ab" 
+                      percent="s4" 
+                      style="width: 130px; height: 130px; line-height: 130px;">
+                  </div>
+                    <div class="caption">Disk Load</div>
+                </div>
+            </div>
+            </widget>
+        </div>      
+    </div>
 
-	<!-- 기준 정보 선택 -->
-	<div class="row">
-		<div class="col-md-12">
-			<widget class="no-background">
-				<div class="row">
-					<form class="form-inline"  name="periodSearchForm" role="form">
-						<fieldset class="col-md-2">
-							<legend class="section">검색 기준</legend>
-							<div class="form-group col-md-12">
-				    <!-- <label class="control-label" for="searchCriInfo">검색 기준</label> -->
+    <!-- 기준 정보 선택 -->
+    <div class="row">
+        <div class="col-md-12">
+            <widget class="no-background">
+                <div class="row">
+                    <form class="form-inline"  name="periodSearchForm" role="form">
+                        <fieldset class="col-md-2">
+                            <legend class="section">검색 기준</legend>
+                            <div class="form-group col-md-12">
+                    <!-- <label class="control-label" for="searchCriInfo">검색 기준</label> -->
    <!--  <select type="email" class="form-control" name="searchCriInfo" ng-model="selectType" placeholder="Enter email" ng-change="searchData(selectType)">
-		<option value="1">Year</option>
+        <option value="1">Year</option>
         <option value="2">Month</option>
         <option value="3">Day</option>
     </select> -->
@@ -119,39 +119,39 @@
         ng-class="{'btn-info': selectType=='3', 'btn-success': selectType!='3'}">시간</button>
     </div>
     
-				  		</div>
-						</fieldset>
-						<fieldset class="col-md-10">
-							<legend class="section">검색 조건</legend>
-							<div class="form-group col-md-3">
-							<select egov-select-list="yearList" ng-model="year" class="form-control"
-							     ng-change="getSearchInfo('y')">
-						    </select>
-						  </div>
-						  <div class="form-group col-md-3" ng-show="selectType != '1'">
-						    <select egov-select-list="monthList" ng-model="month" class="form-control"
+                        </div>
+                        </fieldset>
+                        <fieldset class="col-md-10">
+                            <legend class="section">검색 조건</legend>
+                            <div class="form-group col-md-3">
+                            <select egov-select-list="yearList" ng-model="year" class="form-control"
+                                 ng-change="getSearchInfo('y')">
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3" ng-show="selectType != '1'">
+                            <select egov-select-list="monthList" ng-model="month" class="form-control"
                                  ng-change="getSearchInfo('m')">
                             </select>
-				      	</select>
-						  </div>
-						  <div class="form-group col-md-3" ng-show="selectType == '3'">
-						  <select egov-select-list="dayList" ng-model="day" class="form-control"
+                        </select>
+                          </div>
+                          <div class="form-group col-md-3" ng-show="selectType == '3'">
+                          <select egov-select-list="dayList" ng-model="day" class="form-control"
                                  ng-change="getSearchInfo('d')">
                             </select>
-						  </div>
-						  <button type="submit" class="btn btn-danger pull-right" ng-click="searchData(selectType, year, month, day)">검색</button>
-						</fieldset>
-					</form>	
-				</div>	
-			</widget>
-		</div>
-	</div>
+                          </div>
+                          <button type="submit" class="btn btn-danger pull-right" ng-click="searchData(selectType, year, month, day)">검색</button>
+                        </fieldset>
+                    </form> 
+                </div>  
+            </widget>
+        </div>
+    </div>
 
-	<!-- 사용자 통계 요약 -->
-	<div class="row">
-		<div class="col-md-12">
-			<widget icon="icon-signal" title='사용자 접속' small-title="테스트 small">
-				<div egov-line2 
+    <!-- 사용자 통계 요약 -->
+    <div class="row">
+        <div class="col-md-12">
+            <widget icon="icon-signal" title='사용자 접속' small-title="">
+                <div egov-line2 
                     data="v1"
                     id="v1"
                     color="visitsColor()"
@@ -172,95 +172,96 @@
             tooltips="true">
                 <svg height="250"></svg>
         </egov-stacked-area-chart> -->
-			</widget>
-		</div>
-	</div>
+            </widget>
+        </div>
+    </div>
 
-	<!-- 지역별 접속율 및 나이대 접속율 / 접속율 -->
+    <!-- 지역별 접속율 및 나이대 접속율 / 접속율 -->
   <div class="row">
-   	<div class="col-md-8">
-     <widget icon="icon-globe" title='지역별 접속율' small-title="접속 추세율" >
-     	<div egov-grid name="demoGrid2" dataset="visitListByLocaiton" style="height:380px;" enable-async-post-render="true" header-row-height="36" row-height="36">
-     		<table>
-		      <thead>
-		        <tr>
-		          <th>지역명</th>
-		          <th>누적수치</th>
-		          <th>비율</th>
-		          <th>변화수치</th>
-		          <th width="300">추세</th>
-		        </tr>
-		      </thead>
-		      <tbody>
-		        <tr>
-		          <td>{{location}}</td>
-		          <td>{{sum}}</td>
-		          <td formatter="percent">{{percent}}</td>
-		          <td formatter="change">{{change}}</td>
-		          <td width="300" async-post-render="renderSparkline" formatter="waitting">{{period}}</td>
-		        </tr>
-		      </tbody>
-			  </table>
-     	</div>
+    <div class="col-md-8">
+     <widget icon="icon-globe" title='지역별 접속율' small-title="" >
+        <div egov-grid name="demoGrid2" dataset="visitListByLocaiton" style="height:380px;" enable-async-post-render="true" header-row-height="36" row-height="36">
+            <table>
+              <thead>
+                <tr>
+                  <th>지역명</th>
+                  <th>누적수치</th>
+                  <th>비율</th>
+                  <th>변화수치</th>
+                  <th width="300">추세</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{location}}</td>
+                  <td>{{sum}}</td>
+                  <td formatter="percent">{{percent}}</td>
+                  <td formatter="change">{{change}}</td>
+                  <td width="300" async-post-render="renderSparkline" formatter="waitting">{{period}}</td>
+                </tr>
+              </tbody>
+              </table>
+        </div>
      </widget>
     </div>
     <div class="col-md-4">
-	    <section class="widget widget-tabs" >
-	     	<div egov-tab >
-					<egov-panel panel-active="tabActive()">
-					  <egov-tab-heading>
-					  	<i class="icon-group"></i> 나이대 접속율
-					  </egov-tab-heading>
-					  <div class="body" style="height:380px;">
-					  	<egov-pie-chart
-		              data="dAge"
-		              id="dAge"
-		              width="350"
-		              height="350"
-		              x="xFunction()"
-		              y="yFunction()"
-		              margin="{left:0,top:0,bottom:0,right:0}"
-		              showLabels="true"
-		              labelType="percent"
-		              showLegend="true"
-		              donut="true"
-		              donutRatio=".5"
-		              donutLabelsOutside="true"
-		              tooltips="true"
-		              tooltipcontent="toolTipContentFunction()"
-		              >
-		            <svg height="350"></svg>
-		          </egov-pie-chart>
-					  </div>
-					</egov-panel>
-					<egov-panel panel-active="tabActive()">
-					  <egov-tab-heading>
-					  	<i class="icon-heart"></i> 성별 접속율
-					  </egov-tab-heading>
-					  <div class="body" style="height:380px;">
-					  	<egov-pie-chart
-	              data="dSex"
-	              id="dSex"
-	              width="350"
-	              height="350"
-	              x="xFunction()"
-	              y="yFunction()"
-	              margin="{left:0,top:0,bottom:0,right:0}"
-	              showLabels="true"
-	              labelType="percent"
-	              showLegend="true"
-	              donut="true"
-	              donutRatio=".5"
-	              donutLabelsOutside="true"
-	              tooltips="true"
-	              tooltipcontent="toolTipContentFunction()"
-	              >
-	              <svg height="350"></svg>
-	          	</egov-pie-chart>
-					  </div>
-					</egov-panel>
-				</div>
-			</section>
+        <section class="widget widget-tabs" >
+            <div egov-tab >
+                    <egov-panel panel-active="tabActive()">
+                      <egov-tab-heading>
+                        <i class="icon-group"></i> 나이대 접속율
+                      </egov-tab-heading>
+                      <div class="body" style="height:380px;">
+                        <egov-pie-chart
+                      data="dAge"
+                      id="dAge"
+                      width="350"
+                      height="350"
+                      x="xFunction()"
+                      y="yFunction()"
+                      margin="{left:0,top:0,bottom:0,right:0}"
+                      showLabels="true"
+                      labelType="percent"
+                      showLegend="true"
+                      donut="true"
+                      donutRatio=".5"
+                      donutLabelsOutside="true"
+                      tooltips="true"
+                      tooltipcontent="toolTipContentFunction()"
+                      >
+                    <svg height="350"></svg>
+                  </egov-pie-chart>
+                      </div>
+                    </egov-panel>
+                    <egov-panel panel-active="tabActive()">
+                      <egov-tab-heading>
+                        <i class="icon-heart"></i> 성별 접속율
+                      </egov-tab-heading>
+                      <div class="body" style="height:380px;">
+                        <egov-pie-chart
+                  data="dSex"
+                  id="dSex"
+                  width="350"
+                  height="350"
+                  x="xFunction()"
+                  y="yFunction()"
+                  margin="{left:0,top:0,bottom:0,right:0}"
+                  showLabels="true"
+                  labelType="percent"
+                  showLegend="true"
+                  donut="true"
+                  donutRatio=".5"
+                  donutLabelsOutside="true"
+                  tooltips="true"
+                  tooltipcontent="toolTipContentFunction()"
+                  color="sexColor()"
+                  >
+                  <svg height="350"></svg>
+                </egov-pie-chart>
+                      </div>
+                    </egov-panel>
+                </div>
+            </section>
     </div>
    </div>
   </div>

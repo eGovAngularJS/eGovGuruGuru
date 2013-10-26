@@ -84,8 +84,8 @@ provider('DashboardService', function(){
             $http.get('visit/retrieveGenderInfo.do', {params : params, headers : headers}).
             success(function(data, status){
                 $scope.dSex = [
-                    {key: "최초접속수(남성)", y: data.menUniqueCount},
-                    {key: "최초접속수(여성)", y: data.womenUniqueCount}, 
+                    //{key: "최초접속수(남성)", y: data.menUniqueCount},
+                    //{key: "최초접속수(여성)", y: data.womenUniqueCount}, 
                     {key: "총 접속수(남성)", y: data.menCount}, 
                     {key: "총 접속수(여성)", y: data.womenCount}
                 ];

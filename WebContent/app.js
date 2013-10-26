@@ -56,13 +56,15 @@ controller('mainCtrl', ['$scope','$window','DashboardService', function ($scope,
 	
 	// chart data 조회
 	$scope.searchData = function(selectType, year, month, day){
-		console.log(selectType, year, month, day);
 	    DashboardService.chartData($scope, selectType, year, month, day);
 	};
 
 	// 차트 색상
 	$scope.visitsColor = function(){
 		return ["#eac85e", "#cf6d51"];
+	};
+	$scope.sexColor = function(){
+		return ["#3da0ea", "#f2ac1e"];
 	};
   
 	// chart axis 설정
