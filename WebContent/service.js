@@ -92,33 +92,44 @@ provider('DashboardService', function(){
             });
         };
 
-        function searchInfo($scope){
+        // 조회조건인 월, 일 조회
+        function searchInfo($scope, type){
             // 조회 조건 조회
-        	var str = "";
-            if($scope.selectType == "1") {
-                $scope.month = null;
-                $scope.day = null;
-                $scope.monthList = null;
-                $scope.dayList = null;
+            if($scope.selectType == "1"){
+                return;
             }else if($scope.selectType == "2") {
-                $scope.day = null;
-                $scope.month = null;
-                $scope.monthList = null;
-                $scope.dayList = null;
-                str = "월";
-            }else{
-            	$scope.day = null;
-            	$scope.dayList = null;
-            	str = "일";
+                if(type == 'y'){
+                    $scope.month = null;
+                    $scope.monthList = null;
+                }else if(type == 'm'){
+                    $scope.day = null;
+                    $scope.dayList = null;
+                    return;
+                }else{
+                    $scope.month = null;
+                    $scope.day = null;
+                    $scope.monthList = null;
+                    $scope.dayList = null;
+                }                
+                innerSearchInfoMonth();
+            }else if($scope.selectType == "3") {
+                if(type == 'm'){
+                    $scope.day = null;
+                    $scope.dayList = null;
+                    innerSearchInfoDay();
+                }else if(type == 'd'){
+                    return;
+                }else{
+                    $scope.month = null;
+                    $scope.monthList = null;
+                    $scope.day = null;
+                    $scope.dayList = null;
+                    innerSearchInfoMonth();
+                }  
             }
 
-            var params = {
-                year : $scope.year,
-                month : $scope.month,
-                day : $scope.day    
-            };
             
-            function innerGetData2(list){
+            function innerGetData2(list, str){
                 var _list = [];
                 var _obj, _pushObj;
                 for(var i = 0, len = list.length; i < len; i++){
@@ -130,16 +141,27 @@ provider('DashboardService', function(){
                 }
                 return _list;
             }
+
             //value.id as value.label group by value.group for value in myOptions
-            $http.get('code/retrieveDateCodeList.do', {params:params, headers : headers}).
-            success(function(data, status){
-                console.log("======getSearchInfo",data);
-                if($scope.selectType == "2"){
-                	$scope.monthList = innerGetData2(data);
-                }else if($scope.selectType == "3"){
-                	$scope.dayList = innerGetData2(data);
-                }
-            });
+            
+            function innerSearchInfoMonth(){
+                $http.get('code/retrieveDateCodeList.do', {params:{year : $scope.year}, headers : headers}).
+                success(function(data, status){
+                    $scope.monthList = innerGetData2(data, "월");
+                    $scope.month = "01";
+                    if($scope.selectType == "3"){
+                        innerSearchInfoDay();
+                    }
+                });
+            }
+
+            function innerSearchInfoDay(){
+                $http.get('code/retrieveDateCodeList.do', {params:{year : $scope.year, month : $scope.month}, headers : headers}).
+                success(function(data, status){
+                    $scope.dayList = innerGetData2(data, "일");
+                    $scope.day = "01";
+                });
+            }
         };
 
         // 

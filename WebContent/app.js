@@ -92,13 +92,13 @@ controller('mainCtrl', ['$scope','$window','DashboardService', function ($scope,
 	// 차트 툴팁 생성
 	$scope.toolTipContentFunction = function(){
 		return function(key, x, y, e, graph) {
-			return  '<h1>' + key +' : '+ y.value + '</h1>';
+			return  '<h4>' + key +' : '+ y.value + '</h4>';
 					//'<p>' +  y + ' at ' + x + '</p>';
 		};
 	};
 	  
-	$scope.getSearchInfo = function(){
-		DashboardService.searchInfo($scope);
+	$scope.getSearchInfo = function(type){
+		DashboardService.searchInfo($scope, type);
 	};
   
 	$scope.tabActive = function(){
@@ -107,9 +107,9 @@ controller('mainCtrl', ['$scope','$window','DashboardService', function ($scope,
 	// 초기화 - data 처리
   
   // 5초마다 조회 myOptions
-	setInterval(function(){
-		DashboardService.status($scope);
-	}, 5000);
+//	setInterval(function(){
+//		DashboardService.status($scope);
+//	}, 5000);
 	DashboardService.status($scope);
 
     // 기본 방문 정보 조회

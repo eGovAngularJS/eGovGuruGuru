@@ -125,18 +125,18 @@
 							<legend class="section">검색 조건</legend>
 							<div class="form-group col-md-3">
 							<select egov-select-list="yearList" ng-model="year" class="form-control"
-							     ng-change="getSearchInfo()">
+							     ng-change="getSearchInfo('y')">
 						    </select>
 						  </div>
 						  <div class="form-group col-md-3" ng-show="selectType != '1'">
 						    <select egov-select-list="monthList" ng-model="month" class="form-control"
-                                 ng-change="getSearchInfo()">
+                                 ng-change="getSearchInfo('m')">
                             </select>
 				      	</select>
 						  </div>
 						  <div class="form-group col-md-3" ng-show="selectType == '3'">
 						  <select egov-select-list="dayList" ng-model="day" class="form-control"
-                                 ng-change="getSearchInfo()">
+                                 ng-change="getSearchInfo('d')">
                             </select>
 						  </div>
 						  <button type="submit" class="btn btn-danger pull-right" ng-click="searchData(selectType, year, month, day)">검색</button>
@@ -205,13 +205,13 @@
      </widget>
     </div>
     <div class="col-md-4">
-	    <section class="widget widget-tabs">
-	     	<div egov-tab>
+	    <section class="widget widget-tabs" >
+	     	<div egov-tab >
 					<egov-panel panel-active="tabActive()">
 					  <egov-tab-heading>
 					  	<i class="icon-group"></i> 나이대 접속율
 					  </egov-tab-heading>
-					  <div class="body">
+					  <div class="body" style="height:380px;">
 					  	<egov-pie-chart
 		              data="dAge"
 		              id="dAge"
@@ -237,7 +237,7 @@
 					  <egov-tab-heading>
 					  	<i class="icon-heart"></i> 성별 접속율
 					  </egov-tab-heading>
-					  <div class="body">
+					  <div class="body" style="height:380px;">
 					  	<egov-pie-chart
 	              data="dSex"
 	              id="dSex"
