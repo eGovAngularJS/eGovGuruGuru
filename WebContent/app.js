@@ -93,7 +93,6 @@ controller('mainCtrl', ['$scope','$window','DashboardService', function ($scope,
 	$scope.toolTipContentFunction = function(){
 		return function(key, x, y, e, graph) {
 			return  '<h4>' + key +' : '+ y.value + '</h4>';
-					//'<p>' +  y + ' at ' + x + '</p>';
 		};
 	};
 	  
@@ -106,10 +105,10 @@ controller('mainCtrl', ['$scope','$window','DashboardService', function ($scope,
 	};
 	// 초기화 - data 처리
   
-  // 5초마다 조회 myOptions
-//	setInterval(function(){
-//		DashboardService.status($scope);
-//	}, 5000);
+  // 5초마다 조회
+	setInterval(function(){
+		DashboardService.status($scope);
+	}, 5000);
 	DashboardService.status($scope);
 
     // 기본 방문 정보 조회

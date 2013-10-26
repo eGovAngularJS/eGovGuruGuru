@@ -142,8 +142,6 @@ provider('DashboardService', function(){
                 return _list;
             }
 
-            //value.id as value.label group by value.group for value in myOptions
-            
             function innerSearchInfoMonth(){
                 $http.get('code/retrieveDateCodeList.do', {params:{year : $scope.year}, headers : headers}).
                 success(function(data, status){
